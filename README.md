@@ -2,7 +2,7 @@
 Augment the current sandbox API to allow HTTPS (or TLS/SSL) function calls from the Python libraries to be used in a secure, performance-isolated fashion inside of Repy.
 
 List of Errors encountered during the addition of HTTPS Call to the sandbox.
-Suppose we are making an API call for repy that will fetch "Weather News" for us and the name of the module/python_file that will do this for is "weather_report". The same module name will be used in the document for reference. 
+Suppose we are making an API call for repy that will fetch "Weather News" for us and the name of that module/python_file that will do this for us is "weather_report". The same module name will be used in the document for reference. 
 
 1. Unsafe Call - getattr, hasattr, __import__(*github is removing some of the underscores for 'import') 
 
@@ -16,7 +16,7 @@ Suppose we are making an API call for repy that will fetch "Weather News" for us
   
    Unsafe call: ("Unsafe call '__import__' with args '('encodings.ascii',)', kwargs '{'fromlist': ['*'], 'level': 0}'",)
    
-   In this case the module is 'ascii' in encodings. We 'import' this module to "weather_report". To do this add we will add the following line to "weather_report":
+   In this case the module is 'ascii' in encodings. We 'import' this module to "weather_report". To do this, we will add the following line to "weather_report":
    
    import encodings.ascii
    
