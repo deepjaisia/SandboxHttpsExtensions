@@ -4,7 +4,7 @@ Augment the current sandbox API to allow HTTPS (or TLS/SSL) function calls from 
 List of Errors encountered during the addition of HTTPS Call to the sandbox.
 Suppose we are making an API call for repy that will fetch "Weather News" for us and the name of the module/python_file that will do this for is "weather_report". The same module name will be used in the document for reference. 
 
-1. Unsafe Call - getattr, hasattr, __import__ (or any other apart from this)
+1. Unsafe Call - getattr, hasattr, __import__(*github is removing some of the underscores for 'import') (or any other calls apart from this)
    
    Solution :-
    
