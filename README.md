@@ -26,7 +26,7 @@ Suppose we are making an API call for repy that will fetch "Weather News" for us
    
    AVOID USING : 
    from encodings import * 
-   ->Do not use this because it makes it difficult to determine where a particular function or attribute came from, and makes debugging difficult.
+   ->Do not use this because it makes it difficult to determine where a particular function or attribute came from, and makes debugging difficult. This also imports all names except those beginning with an underscore (_)
    
    b. Add the following line of code to your own module  
    ->module_name.getattr = getattr  (without the arrow)
@@ -47,6 +47,7 @@ Suppose we are making an API call for repy that will fetch "Weather News" for us
   https://github.com/SeattleTestbed/repy_v2/issues/92
   http://mikegrouchy.com/blog/2012/05/be-pythonic-__init__py.html
   http://stackoverflow.com/questions/1944625/what-is-the-relationship-between-getattr-and-getattr
+  https://docs.python.org/3/tutorial/modules.html
   
   
   
