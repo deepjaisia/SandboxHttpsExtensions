@@ -48,6 +48,9 @@ Suppose we are making an API call for repy that will fetch "Weather News" for us
   http://mikegrouchy.com/blog/2012/05/be-pythonic-__init__py.html
   http://stackoverflow.com/questions/1944625/what-is-the-relationship-between-getattr-and-getattr
   https://docs.python.org/3/tutorial/modules.html
+  https://github.com/burnash/gspread/issues/223
+  https://github.com/burnash/gspread/pull/228
+  https://www.python.org/dev/peps/pep-0476/#opting-out
   
   
   
