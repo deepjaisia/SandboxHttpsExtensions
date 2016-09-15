@@ -63,6 +63,8 @@ Suppose we are making an API call for repy that will fetch "Weather News" for us
    b. Add the following line of code to your own module  
    ->module_name.getattr = getattr  (without the arrow)
    Where module_name = The name of the module which gives the getattr/hasattr/__import__ error.
+   
+   This technique is called monkey-patching. You could read about this over here (http://stackoverflow.com/questions/5626193/what-is-a-monkey-patch) or Wikipedia is the best place to look and understand. 
 
    Eg.)
    
