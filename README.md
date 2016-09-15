@@ -1,4 +1,5 @@
-# SandboxHttpsExtensions
+#SandboxHttpsExtensions
+
 Augment the current sandbox API to allow HTTPS (or TLS/SSL) function calls from the Python libraries to be used in a secure, performance-isolated fashion inside of Repy.
 
 "httpsget" Tutorial
@@ -14,13 +15,13 @@ General Operation
 
 Before we start to use the function call we need to install some things first. The list with details is shown below:-
 
-1. Repy 
+-> Repy
 
 You have to install Repy before you can start using the call itself. This link : "https://seattle.poly.edu/wiki/RepyV2Tutorial" provides gives a small tour to the Sandbox and the installation procedure as well. Once you are done with the setup of "Repy"
 	
-2. Apache Server
+-> Apache Server
 
-This is not necessary to install, but if you want to make any changes and test out the call on your localsystem installing this server is the best option. 
+This is not necessary to install, but if you want to make any changes and test out the call on your localsystem installing this server is the best option.
 
 You can install Apache Server using the command given below in the Ubuntu Terminal or download it from this link (https://httpd.apache.org/download.cgi) according to your Operating System.
 
@@ -30,7 +31,7 @@ You would also need to enable SSL on the Apache server once you've installed it.
 
 sudo a2endmod ssl                
 sudo a2ensite default-ssl        
-sudo service apache2 restart     
+sudo service apache2 restart
 
 List of Errors encountered during the addition of HTTPS Call to the sandbox.
 Suppose we are making an API call for repy that will fetch "Weather News" for us and the name of that module/python_file that will do this for us is "weather_report". The same module name will be used in the document for reference. 
@@ -82,8 +83,3 @@ Suppose we are making an API call for repy that will fetch "Weather News" for us
   https://github.com/burnash/gspread/issues/223
   https://github.com/burnash/gspread/pull/228
   https://www.python.org/dev/peps/pep-0476/#opting-out
-  
-  
-  
-  
-   
