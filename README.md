@@ -33,6 +33,8 @@ sudo a2endmod ssl
 sudo a2ensite default-ssl        
 sudo service apache2 restart
 
+---------------------------------------------------------------------------------------------------------------------------------------
+
 List of Errors encountered during the addition of HTTPS Call to the sandbox.
 Suppose we are making an API call for repy that will fetch "Weather News" for us and the name of that module/python_file that will do this for us is "weather_report". The same module name will be used in the document for reference. 
 
