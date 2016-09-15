@@ -24,17 +24,13 @@ This is not necessary to install, but if you want to make any changes and test o
 
 You can install Apache Server using the command given below in the Ubuntu Terminal or download it from this link (https://httpd.apache.org/download.cgi) according to your Operating System.
 
-##############################
-#sudo apt-get install apache2#
-##############################
+'sudo apt-get install apache2'
 
 You would also need to enable SSL on the Apache server once you've installed it. The new Apache Server is packaged with SSL Support so there is no need to dive into the configuration files like we had to in the early days. There are set of 3 commands that will help you enable SSL on Apache in no time. You could always follow this link (https://help.ubuntu.com/14.04/serverguide/httpd.html) if you need more info or you get lost.
 
-###################################
-#sudo a2endmod ssl                #
-#sudo a2ensite default-ssl        #
-#sudo service apache2 restart     #
-###################################
+sudo a2endmod ssl                
+sudo a2ensite default-ssl        
+sudo service apache2 restart     
 
 List of Errors encountered during the addition of HTTPS Call to the sandbox.
 Suppose we are making an API call for repy that will fetch "Weather News" for us and the name of that module/python_file that will do this for us is "weather_report". The same module name will be used in the document for reference. 
