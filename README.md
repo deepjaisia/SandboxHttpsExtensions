@@ -60,7 +60,8 @@ Suppose we are making an API call for repy that will fetch "Weather News" for us
    from encodings import * 
    ->Do not use this because it makes it difficult to determine where a particular function or attribute came from, and makes debugging difficult. This also imports all names except those beginning with an underscore (_)
    
-   b. Add the following line of code to your own module  
+   b. Add the following line of code to your own module
+   
    ->module_name.getattr = getattr  (without the arrow)
    Where module_name = The name of the module which gives the getattr/hasattr/__import__ error.
    
@@ -75,13 +76,12 @@ Suppose we are making an API call for repy that will fetch "Weather News" for us
   
   This same strategy could be adopted for any other "Unsafe Call" errors that are encountered while making your own API call for the 'repyV2' sandbox. There is no surity that it will work for sure and use it at your own risk.
   
-  References:
+References:
   
-  http://stackoverflow.com/questions/448271/what-is-init-py-for
-  https://github.com/SeattleTestbed/repy_v2/issues/92
-  http://mikegrouchy.com/blog/2012/05/be-pythonic-__init__py.html
-  http://stackoverflow.com/questions/1944625/what-is-the-relationship-between-getattr-and-getattr
-  https://docs.python.org/3/tutorial/modules.html
-  https://github.com/burnash/gspread/issues/223
-  https://github.com/burnash/gspread/pull/228
-  https://www.python.org/dev/peps/pep-0476/#opting-out
+http://stackoverflow.com/questions/448271/what-is-init-py-for
+https://github.com/SeattleTestbed/repy_v2/issues/92
+http://mikegrouchy.com/blog/2012/05/be-pythonic-__init__py.html
+http://stackoverflow.com/questions/1944625/what-is-the-relationship-between-getattr-and-getattr https://docs.python.org/3/tutorial/modules.html
+https://github.com/burnash/gspread/issues/223
+https://github.com/burnash/gspread/pull/228
+https://www.python.org/dev/peps/pep-0476/#opting-out
