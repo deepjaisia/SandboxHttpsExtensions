@@ -33,7 +33,6 @@ sudo a2endmod ssl
 sudo a2ensite default-ssl        
 sudo service apache2 restart
 
-Here is a little example on how you can use the function call and use it to your benefit so you can download the contents of a website or you can even download a zip file from the server and save it on your computer.
 
 *****************************************************************************
 *httpsget('server_name', 'method', 'webpage_within_server', trust_on_server)*
@@ -43,43 +42,47 @@ Here is a little example on how you can use the function call and use it to your
 #>Doc string:#
 ##############
 
-#########
-#Purpose#
-#########
-
+>Purpose:
 Provides you with the content of the webpage that is stored at the address location of the webserver provided by the user. The content could be the source code of the webpage, a text document or even a zip file.
 
-###########
-#Arguments#
-###########
+>Arguments:
+->server_name : The name of the server needs to be specified. It could be 'https://google.com' or any other website. It can also be your 'localhost' server.
 
-server_name : The name of the server needs to be specified. It could be 'https://google.com' or any other website. It can also be your 'localhost' server.
+->method : It is used to specify which method do you want to use when fetching contents from server using this API Call. It can be 'GET' or 'PUT'. 'GET' is working for now but functionality for 'PUT' still needs to be tested out.
 
-method : It is used to specify which method do you want to use when fetching contents from server using this API Call. It can be 'GET' or 'PUT'. 'GET' is working for now but functionality for 'PUT' still needs to be tested out.
+->webpage_within_server : This is used to give the name of the webpage that the user wants to get the information of. It can be left blank or you can input '/', if there is no specific webpage that the user is hunting for within the server.
 
-webpage_within_server : This is used to give the name of the webpage that the user wants to get the information of. It can be left blank or you can input '/', if there is no specific webpage that the user is hunting for within the server.
+->trust_on_server : It is a boolean value (True/False). If the user wants to trust the server and has the certificate for the particular server he/she is connecting then he/she can put 'True' in this field (Eg. Connecting to localhost or some known local servers). But if the server is unknown it is better to fill the field with 'False' (Eg. Connecting to servers on the internet like 'Google', 'Yahoo', 'YouTube').
 
-trust_on_server : It is a boolean value (True/False). If the user wants to trust the server and has the certificate for the particular server he/she is connecting then he/she can put 'True' in this field (Eg. Connecting to localhost or some known local servers). But if the server is unknown it is better to fill the field with 'False' (Eg. Connecting to servers on the internet like 'Google', 'Yahoo', 'YouTube').
 
-############
-#Exceptions#
-############
+>Exceptions:
+-> NameError : If the boolean expression of "trust_on_server" field is inappropriate
+-> SSLError : If the SSL certificate of the user is not genuine.
 
-NameError : If the boolean expression of "trust_on_server" field is inappropriate
 
-SSLError : If the SSL certificate of the user is not genuine.
+>Side Effects
+None so far.
 
-##############
-#Side Effects#
-##############
+>Returns
+1. The status of the server
+2. The contents of the webpage that is requested within the webserver.
 
-None.
+##########
+#Example:#
+##########
 
-#########
-#Returns#
-#########
+Here is a little example on how you can use the function call and use it to your benefit so you can download the contents of a website or you can even download a zip file from the server and save it on your computer.
 
-The status of the server and the contents of the webpage that is requested within the webserver.
+a, b = httpsget('localhost', 'GET', '/test_https.py.zip', True)
+log(a, b, "\n")
+file2 = openfile('asdf', True)
+file2.writeat(b,0)
+
+Since we know that the API Call returns two values therefore that's the reason we have two variables "'a' and 'b'". 'a' gives us the status of the website and 'b' returns the content of the webpage that we have requested from the server 'localost' which is "/test_https.py.zip". And from this we can conclude that we are requesting a zip file from the server stored at that location. 
+
+We are using 'GET' method over here. We are also giving a boolean value 'True' since we trust the server in this case. 
+
+We are using the other Repy API Calls to write the contents that we fetched to a file.
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 
