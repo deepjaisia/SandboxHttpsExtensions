@@ -42,10 +42,10 @@ sudo service apache2 restart
 #>Doc string:#
 ##############
 
->Purpose:
+-->Purpose:
 Provides you with the content of the webpage that is stored at the address location of the webserver provided by the user. The content could be the source code of the webpage, a text document or even a zip file.
 
->Arguments:
+-->Arguments:
 ->server_name : The name of the server needs to be specified. It could be 'https://google.com' or any other website. It can also be your 'localhost' server.
 
 ->method : It is used to specify which method do you want to use when fetching contents from server using this API Call. It can be 'GET' or 'PUT'. 'GET' is working for now but functionality for 'PUT' still needs to be tested out.
@@ -55,15 +55,15 @@ Provides you with the content of the webpage that is stored at the address locat
 ->trust_on_server : It is a boolean value (True/False). If the user wants to trust the server and has the certificate for the particular server he/she is connecting then he/she can put 'True' in this field (Eg. Connecting to localhost or some known local servers). But if the server is unknown it is better to fill the field with 'False' (Eg. Connecting to servers on the internet like 'Google', 'Yahoo', 'YouTube').
 
 
->Exceptions:
+-->Exceptions:
 -> NameError : If the boolean expression of "trust_on_server" field is inappropriate
 -> SSLError : If the SSL certificate of the user is not genuine.
 
 
->Side Effects
+-->Side Effects
 None so far.
 
->Returns
+-->Returns
 1. The status of the server
 2. The contents of the webpage that is requested within the webserver.
 
@@ -73,10 +73,10 @@ None so far.
 
 Here is a little example on how you can use the function call and use it to your benefit so you can download the contents of a website or you can even download a zip file from the server and save it on your computer.
 
->a, b = httpsget('localhost', 'GET', '/test_https.py.zip', True)
->log(a, b, "\n")
->file2 = openfile('asdf', True)
->file2.writeat(b,0)
+>>a, b = httpsget('localhost', 'GET', '/test_https.py.zip', True)
+>>log(a, b, "\n")
+>>file2 = openfile('asdf', True)
+>>file2.writeat(b,0)
 
 The user can use this as a test code and save it with '.r2py' extension for usage.
 
