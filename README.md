@@ -33,6 +33,39 @@ sudo a2endmod ssl
 sudo a2ensite default-ssl        
 sudo service apache2 restart
 
+Here is a little example on how you can use the function call and use it to your benefit so you can download the contents of a website or you can even download a zip file from the server and save it on your computer.
+
+httpsget('server_name', 'method', 'webpage_within_server', trust_on_server)
+ 
+Doc string:
+<Purpose>
+
+Provides you with the content of the webpage that is stored at the address location of the webserver provided by the user. The content could be the source code of the webpage, a text document or even a zip file.
+
+<Arguments>
+
+server_name : The name of the server needs to be specified. It could be 'https://google.com' or any other website. It can also be your 'localhost' server.
+
+method : It is used to specify which method do you want to use when fetching contents from server using this API Call. It can be 'GET' or 'PUT'. 'GET' is working for now but functionality for 'PUT' still needs to be tested out.
+
+webpage_within_server : This is used to give the name of the webpage that the user wants to get the information of. It can be left blank or you can input '/', if there is no specific webpage that the user is hunting for within the server.
+
+trust_on_server : It is a boolean value (True/False). If the user wants to trust the server and has the certificate for the particular server he/she is connecting then he/she can put 'True' in this field (Eg. Connecting to localhost or some known local servers). But if the server is unknown it is better to fill the field with 'False' (Eg. Connecting to servers on the internet like 'Google', 'Yahoo', 'YouTube').
+
+<Exceptions>
+
+NameError : If the boolean expression of "trust_on_server" field is inappropriate
+
+SSLError : If the SSL certificate of the user is not genuine.
+
+<Side Effects>
+
+None.
+
+<Returns>
+
+The status of the server and the contents of the webpage that is requested within the webserver.
+
 ---------------------------------------------------------------------------------------------------------------------------------------
 
 List of Errors encountered during the addition of HTTPS Call to the sandbox.
