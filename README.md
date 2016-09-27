@@ -73,10 +73,12 @@ None so far.
 
 Here is a little example on how you can use the function call and use it to your benefit so you can download the contents of a website or you can even download a zip file from the server and save it on your computer.
 
-a, b = httpsget('localhost', 'GET', '/test_https.py.zip', True)
-log(a, b, "\n")
-file2 = openfile('asdf', True)
-file2.writeat(b,0)
+>a, b = httpsget('localhost', 'GET', '/test_https.py.zip', True)
+>log(a, b, "\n")
+>file2 = openfile('asdf', True)
+>file2.writeat(b,0)
+
+The user can use this as a test code and save it with '.r2py' extension for usage.
 
 Since we know that the API Call returns two values therefore that's the reason we have two variables "'a' and 'b'". 'a' gives us the status of the website and 'b' returns the content of the webpage that we have requested from the server 'localost' which is "/test_https.py.zip". And from this we can conclude that we are requesting a zip file from the server stored at that location. 
 
