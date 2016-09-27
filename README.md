@@ -39,7 +39,9 @@ Here is a little example on how you can use the function call and use it to your
 *httpsget('server_name', 'method', 'webpage_within_server', trust_on_server)*
 *****************************************************************************
 
----->Doc string:
+##############
+#>Doc string:#
+##############
 
 #########
 #Purpose#
