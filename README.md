@@ -35,14 +35,21 @@ sudo service apache2 restart
 
 Here is a little example on how you can use the function call and use it to your benefit so you can download the contents of a website or you can even download a zip file from the server and save it on your computer.
 
-httpsget('server_name', 'method', 'webpage_within_server', trust_on_server)
- 
-Doc string:
-<Purpose>
+*****************************************************************************
+*httpsget('server_name', 'method', 'webpage_within_server', trust_on_server)*
+*****************************************************************************
+
+---->Doc string:
+
+#########
+#Purpose#
+#########
 
 Provides you with the content of the webpage that is stored at the address location of the webserver provided by the user. The content could be the source code of the webpage, a text document or even a zip file.
 
-<Arguments>
+###########
+#Arguments#
+###########
 
 server_name : The name of the server needs to be specified. It could be 'https://google.com' or any other website. It can also be your 'localhost' server.
 
@@ -52,17 +59,23 @@ webpage_within_server : This is used to give the name of the webpage that the us
 
 trust_on_server : It is a boolean value (True/False). If the user wants to trust the server and has the certificate for the particular server he/she is connecting then he/she can put 'True' in this field (Eg. Connecting to localhost or some known local servers). But if the server is unknown it is better to fill the field with 'False' (Eg. Connecting to servers on the internet like 'Google', 'Yahoo', 'YouTube').
 
-<Exceptions>
+############
+#Exceptions#
+############
 
 NameError : If the boolean expression of "trust_on_server" field is inappropriate
 
 SSLError : If the SSL certificate of the user is not genuine.
 
-<Side Effects>
+##############
+#Side Effects#
+##############
 
 None.
 
-<Returns>
+#########
+#Returns#
+#########
 
 The status of the server and the contents of the webpage that is requested within the webserver.
 
@@ -83,7 +96,7 @@ Suppose we are making an API call for repy that will fetch "Weather News" for us
   
    Unsafe call: ("Unsafe call '__import__' with args '('encodings.ascii',)', kwargs '{'fromlist': ['*'], 'level': 0}'",)
    
-   In this case the module is 'ascii' in encodings. We 'import' this module to "weather_report". To do this, we will add the following line to "weather_report":
+   In this case the module is 'ascii' in encodings. We 'import' this module to "weather_report". To do this, we will add the following    line to "weather_report":
    
    import encodings.ascii
    
