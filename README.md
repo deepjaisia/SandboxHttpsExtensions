@@ -24,7 +24,8 @@ You have to install Repy before you can start using the call itself. This link :
 	
 -> Apache Server
 
->Installation
+>Installation      
+
 This is not necessary to install, but if you want to make any changes and test out the call on your localsystem installing this server is the best option.
 
 You can install Apache Server using the command given below in the Ubuntu Terminal or download it from this link (https://httpd.apache.org/download.cgi) according to your Operating System.
@@ -74,10 +75,10 @@ We are now almost there, we have created a Self-Signed Certifcate and now all th
 #Doc string:#
 #############
 
--->Purpose:
+-->Purpose:      
 Provides you with the content of the webpage that is stored at the address location of the webserver provided by the user. The content could be the source code of the webpage, a text document or even a zip file.
 
--->Arguments:
+-->Arguments:      
 ->server_name : The name of the server needs to be specified. It could be 'https://google.com' or any other website. It can also be your 'localhost' server.
 
 ->method : It is used to specify which method do you want to use when fetching contents from server using this API Call. It can be 'GET' or 'PUT'. 'GET' is working for now but functionality for 'PUT' still needs to be tested out.
@@ -87,15 +88,15 @@ Provides you with the content of the webpage that is stored at the address locat
 ->trust_on_server : It is a boolean value (True/False). If the user wants to trust the server and has the certificate for the particular server he/she is connecting then he/she can put 'True' in this field (Eg. Connecting to localhost or some known local servers). But if the server is unknown it is better to fill the field with 'False' (Eg. Connecting to servers on the internet like 'Google', 'Yahoo', 'YouTube').
 
 
--->Exceptions:
+-->Exceptions:      
 -> NameError : If the boolean expression of "trust_on_server" field is inappropriate
 -> SSLError : If the SSL certificate of the user is not genuine.
 
 
--->Side Effects
+-->Side Effects      
 None so far.
 
--->Returns
+-->Returns      
 1. The status of the server
 2. The contents of the webpage that is requested within the webserver.
 
