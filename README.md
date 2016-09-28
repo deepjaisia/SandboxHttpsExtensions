@@ -36,7 +36,7 @@ You can install Apache Server using the command given below in the Ubuntu Termin
 You would also need to enable SSL on the Apache server once you've installed it. The new Apache Server is packaged with SSL Support so there is no need to dive into the configuration files like we had to in the early days. There are set of 3 commands that will help you enable SSL on Apache in no time. You could always follow this link (https://help.ubuntu.com/14.04/serverguide/httpd.html) if you need more info or you get lost.
 
 sudo a2endmod ssl                
-sudo a2ensite default-ssl        
+sudo a2ensite default-ssl      
 sudo service apache2 restart
 
 >Adding files Apache Server
@@ -105,10 +105,10 @@ None so far.
 
 1> Here is a little example on how you can use the function call and use it to your benefit so you can download the contents of a website or you can even download a zip file from the server and save it on your computer.
 
-->a, b = httpsget('localhost', 'GET', '/test_https.py.zip', True)
-->log(a, b, "\n")
-->file2 = openfile('asdf', True)
-->file2.writeat(b,0)
+a, b = httpsget('localhost', 'GET', '/test_https.py.zip', True)
+log(a, b, "\n")
+file2 = openfile('asdf', True)
+file2.writeat(b,0)
 
 The user can use this as a test code and save it with '.r2py' extension for usage. To run this program the user can type the following line in the terminal. The user should run the program in 'sudo' mode if "Permission Denied" error pops up during running the code. If this doesn't help it might be an restriction within "Repy" Sandbox itself. We are going to assume that the user saves the file with the name "test_https.r2py".
 
@@ -122,10 +122,10 @@ We are using the other Repy API Calls to write the contents that we fetched from
 
 2> This is an another example where if the user wants to just want to see the HTML content of any webpage on the internet.
 
-->a, b = httpsget('www.google.com', 'GET', '/', False)
-->log(a, b, "\n")
-->file2 = openfile('asdf', True)
-->file2.writeat(b,0)
+a, b = httpsget('www.google.com', 'GET', '/', False)
+log(a, b, "\n")
+file2 = openfile('asdf', True)
+file2.writeat(b,0)
 
 The user can use this as a test code and save it with '.r2py' extension for usage. To run this program the user can type the following line in the terminal. The user should run the program in 'sudo' mode if "Permission Denied" error pops up during running the code. If this doesn't help it might be an restriction within "Repy" Sandbox itself. We are going to assume that the user saves the file with the name "test_https.r2py".
 
