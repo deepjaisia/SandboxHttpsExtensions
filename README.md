@@ -40,7 +40,7 @@ sudo a2endmod ssl
 sudo a2ensite default-ssl      
 sudo service apache2 restart
 
->Adding files Apache Server
+>Adding files to Apache Server
 
 When you have enabled SSL on Apache, the first thing that the user would be doing is adding some webpages or files to your own server and test out if the server is actually functioning properly. In order for that to happen the user has to add the files to a location on the machine from where the server could access the files. One thing to note is that the Apache Server can serve some of the basic file types by default like : .html, .txt, .py, .zip and some more.  For "apache2" the user can add the files to the following folder.  
 
