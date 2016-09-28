@@ -32,7 +32,7 @@ You can install Apache Server using the command given below in the Ubuntu Termin
 
 'sudo apt-get install apache2'
 
->Enabling SSH
+>Enabling SSL
 
 You would also need to enable SSL on the Apache server once you've installed it. The new Apache Server is packaged with SSL Support so there is no need to dive into the configuration files like we had to in the early days. There are set of 3 commands that will help you enable SSL on Apache in no time. You could always follow this link (https://help.ubuntu.com/14.04/serverguide/httpd.html) if you need more info or you get lost.
 
@@ -42,13 +42,13 @@ sudo service apache2 restart
 
 >Adding files Apache Server
 
-When you have enabled SSH on Apache, the first thing that the user would be doing is adding some webpages or files to your own server and test out if the server is actually functioning properly. In order for that to happen the user has to add the files to a location on the machine from where the server could access the files. One thing to note is that the Apache Server can serve some of the basic file types by default like : .html, .txt, .py, .zip and some more.  For "apache2" the user can add the files to the following folder.  
+When you have enabled SSL on Apache, the first thing that the user would be doing is adding some webpages or files to your own server and test out if the server is actually functioning properly. In order for that to happen the user has to add the files to a location on the machine from where the server could access the files. One thing to note is that the Apache Server can serve some of the basic file types by default like : .html, .txt, .py, .zip and some more.  For "apache2" the user can add the files to the following folder.  
 
 ->"/var/www/html"
 
 >Creating Self-Signed Certificate for your Apache Server
 
-Aapche comes with it's own server and key when you enable 'SSH' on Apache. But it doesn't stop the user from playing with their own Self-Signed Certificates for the server. This part of guide will help you on how you can create a Self-Signed Certificate and use that for your Apache Server. We are going to use OpenSSL from the terminal window to create the certificate and then some minor modifications to the configuration file of the Server will get you up and running in no time.
+Aapche comes with it's own server and key when you enable 'SSL' on Apache. But it doesn't stop the user from playing with their own Self-Signed Certificates for the server. This part of guide will help you on how you can create a Self-Signed Certificate and use that for your Apache Server. We are going to use OpenSSL from the terminal window to create the certificate and then some minor modifications to the configuration file of the Server will get you up and running in no time.
 
 For the certificate, just run the following command in the terminal window. You will come across some fields that you have to fill out.
 Note : Remember the certificate password as it will be used everytime you restart the server.
