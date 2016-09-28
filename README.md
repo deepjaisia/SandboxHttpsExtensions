@@ -89,7 +89,7 @@ Provides you with the content of the webpage that is stored at the address locat
 
 
 -->Exceptions:      
--> NameError : If the boolean expression of "trust_on_server" field is inappropriate
+-> NameError : If the boolean expression of "trust_on_server" field is inappropriate      
 -> SSLError : If the SSL certificate of the user is not genuine.
 
 
@@ -97,7 +97,7 @@ Provides you with the content of the webpage that is stored at the address locat
 None so far.
 
 -->Returns      
-1. The status of the server
+1. The status of the server      
 2. The contents of the webpage that is requested within the webserver.
 
 ##########
