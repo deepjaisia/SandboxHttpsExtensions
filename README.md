@@ -65,7 +65,19 @@ This command will create a single .pem object which will contain the 'certificat
 
 -days : This specifies the number of days for which the certificate will be valid for. It is 365 days in this case.
  
-We are now almost there, we have created a Self-Signed Certifcate and now all that we have to do is make Apache Server find this certificate and use this as default. Firstly we have to find the configuration file and then edit it. Mostly for Ubuntu users you could find the configuration file at this location : ''
+We are now almost there, we have created a Self-Signed Certifcate and now all that we have to do is make Apache Server find this certificate and use this as default. Firstly we have to find the configuration file and then edit it. Mostly for Ubuntu users you could find the configuration file at this location : '/etc/apache2/sites-enabled/default-ssl.conf'. 
+
+'default-ssl.conf' is the configuration file that we are looking for. Upon opening up the file in a text editor we have to search for the following lines in the configuration file :  
+
+SSLCertificateFile	/etc/ssl/certs/ssl-cert-snakeoil.pem       
+SSLCertificateKeyFile   /etc/ssl/private/ssl-cert-snakeoil.key
+
+We replace the location of the SSLCertificateFile and the SSLCertificateKeyFile to the location where we saved our own Self-Signed Certificate and Key. The location for the 'Self-Signed Certificate' and 'Key File' will be the same directory where the user ran their "OpenSSL" command in the terminal. The user can check their current directory by typing 'pwd' in the terminal. The location for me in this case was 'Home' so I changed the location for the SSLCertificateFile and SSLCertificateKeyFile as follows:        
+
+SSLCertificateFile	/home/frostbyte/mysite.pem       
+SSLCertificateKeyFile   /home/frostbyte/mysite.pem       
+
+After changing the locations for both the files, just save the configuration file. We have successfully now configured SSL on Apache Server using our Self-Signed Certificate and Key.
 
 *****************************************************************************
 *httpsget('server_name', 'method', 'webpage_within_server', trust_on_server)*
