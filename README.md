@@ -1,20 +1,16 @@
-#SandboxHttpsExtensions
+###SandboxHttpsExtensions
 
 Augment the current sandbox API to allow HTTPS (or TLS/SSL) function calls from the Python libraries to be used in a secure, performance-isolated fashion inside of Repy.
 
->"httpsget" Tutorial
+##"httpsget" Tutorial
 
-##############
-#Introduction#
-##############
+#Introduction
 
 This guide gives an introduction about the function call as well as its usage, the function call can be used by the client to download files from a sever (Apache server in this case). The manual can also be used as a guide on how to create a function call for yourself in the RepyV2 Sandbox. The commands used in this manual are created with reference to "UBUNTU 16.04" OS, but it can also be used with "Windows 10" OS since recently "Bash" support has been released for Windows.
 
 It is assumed you have some basic knowledge of ports, self-signed certificate, certificate verification, "Apache" webserver. Lastly, a pretty basic understanding of Python Programming language is also required. The tutorial at  "http://www.python.org/doc/" might help you brush up with some basic concepts and get you started ASAP or you could always try "CodeAcademy" or "Learning Python the Hard Way" if you feel like you want to dwelve more into python and have time at hand. You do not have to be an expert at Python, but being able to write a simple program in Python is essential.
 
-###################
-#General Operation#
-###################
+#General Operation
 
 Before we start to use the function call we need to install some things first. The list with details is shown below:-
 
