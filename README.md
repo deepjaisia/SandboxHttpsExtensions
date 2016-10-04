@@ -1,16 +1,16 @@
-###SandboxHttpsExtensions
+#SandboxHttpsExtensions
 
 Augment the current sandbox API to allow HTTPS (or TLS/SSL) function calls from the Python libraries to be used in a secure, performance-isolated fashion inside of Repy.
 
 ##"httpsget" Tutorial
 
-#Introduction
+###Introduction
 
 This guide gives an introduction about the function call as well as its usage, the function call can be used by the client to download files from a sever (Apache server in this case). The manual can also be used as a guide on how to create a function call for yourself in the RepyV2 Sandbox. The commands used in this manual are created with reference to "UBUNTU 16.04" OS, but it can also be used with "Windows 10" OS since recently "Bash" support has been released for Windows.
 
 It is assumed you have some basic knowledge of ports, self-signed certificate, certificate verification, "Apache" webserver. Lastly, a pretty basic understanding of Python Programming language is also required. The tutorial at  "http://www.python.org/doc/" might help you brush up with some basic concepts and get you started ASAP or you could always try "CodeAcademy" or "Learning Python the Hard Way" if you feel like you want to dwelve more into python and have time at hand. You do not have to be an expert at Python, but being able to write a simple program in Python is essential.
 
-#General Operation
+###General Operation
 
 Before we start to use the function call we need to install some things first. The list with details is shown below:-
 
@@ -32,9 +32,11 @@ You can install Apache Server using the command given below in the Ubuntu Termin
 
 You would also need to enable SSL on the Apache server once you've installed it. The new Apache Server is packaged with SSL Support so there is no need to dive into the configuration files like we had to in the early days. There are set of 3 commands that will help you enable SSL on Apache in no time. You could always follow this link (https://help.ubuntu.com/14.04/serverguide/httpd.html) if you need more info or you get lost.
 
+'''
 sudo a2endmod ssl                
 sudo a2ensite default-ssl      
 sudo service apache2 restart
+'''
 
 >Adding files to Apache Server
 
@@ -47,9 +49,10 @@ When you have enabled SSL on Apache, the first thing that the user would be doin
 Aapche comes with it's own server and key when you enable 'SSL' on Apache. But it doesn't stop the user from playing with their own Self-Signed Certificates for the server. This part of guide will help you on how you can create a Self-Signed Certificate and use that for your Apache Server. We are going to use OpenSSL from the terminal window to create the certificate and then some minor modifications to the configuration file of the Server will get you up and running in no time.
 
 For the certificate, just run the following command in the terminal window. You will come across some fields that you have to fill out.
-Note : Remember the certificate password as it will be used everytime you restart the server.
 
-->openssl req -x509 -newkey rsa:4096 -keyout mysite.pem -out mysite.pem -days 365
+Note : Remember the certificate password as it will be used everytime you restart the service for the server.
+
+'''openssl req -x509 -newkey rsa:4096 -keyout mysite.pem -out mysite.pem -days 365'''
 
 This command will create a single .pem object which will contain the 'certificate' and the 'key'. Explanation of the different attributes used in the command is given below:
 
@@ -79,9 +82,7 @@ After changing the locations for both the files, just save the configuration fil
 *httpsget('server_name', 'method', 'webpage_within_server', trust_on_server)*
 *****************************************************************************
 
-#############
-#Doc string:#
-#############
+###Doc string:
 
 -->Purpose:      
 Provides you with the content of the webpage that is stored at the address location of the webserver provided by the user. The content could be the source code of the webpage, a text document or even a zip file.
@@ -108,20 +109,20 @@ None so far.
 1. The status of the server      
 2. The contents of the webpage that is requested within the webserver.
 
-##########
-#Example:#
-##########
+###Example:
 
 1> Here is a little example on how you can use the function call and use it to your benefit so you can download the contents of a website or you can even download a zip file from the server and save it on your computer.
 
+'''
 a, b = httpsget('localhost', 'GET', '/test_https.py.zip', True)      
 log(a, b, "\n")      
 file2 = openfile('asdf', True)      
-file2.writeat(b,0)      
+file2.writeat(b,0)
+'''
 
 The user can use this as a test code and save it with '.r2py' extension for usage. To run this program the user can type the following line in the terminal. The user should run the program in 'sudo' mode if "Permission Denied" error pops up during running the code. If this doesn't help it might be an restriction within "Repy" Sandbox itself. We are going to assume that the user saves the file with the name "test_https.r2py".
 
--> sudo python repy.py restrictions.test test_https.r2py
+'''sudo python repy.py restrictions.test test_https.r2py'''
 
 Since we know that the API Call returns two values therefore that's the reason we have two variables "'a' and 'b'". 'a' gives us the status of the website and 'b' returns the content of the webpage that we have requested from the server 'localost' which is "/test_https.py.zip". And from this we can conclude that we are requesting a zip file from the server stored at that location. 
 
@@ -131,22 +132,22 @@ We are using the other Repy API Calls to write the contents that we fetched from
 
 2> This is an another example where if the user wants to just want to see the HTML content of any webpage on the internet.
 
+'''
 a, b = httpsget('www.google.com', 'GET', '/', False)      
 log(a, b, "\n")      
 file2 = openfile('asdf', True)      
-file2.writeat(b,0)      
+file2.writeat(b,0)
+'''
 
 The user can use this as a test code and save it with '.r2py' extension for usage. To run this program the user can type the following line in the terminal. The user should run the program in 'sudo' mode if "Permission Denied" error pops up during running the code. If this doesn't help it might be an restriction within "Repy" Sandbox itself. We are going to assume that the user saves the file with the name "test_https.r2py".
 
--> sudo python repy.py restrictions.test test_https.r2py
+'''sudo python repy.py restrictions.test test_https.r2py'''
 
 This 'Repy' program returns the content of the webpage 'www.google.com' and then displays the content of the webpage and also write the same output to the file which is named 'asdf'. See how we put 'False' in the last field of the 'httpsget' call in the first line of the program, that is because we don't know if the server on the internet is certified or not.
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 
-############
-#HELP GUIDE#
-############
+#HELP GUIDE
 
 This is a list of Errors I encountered during the addition of HTTPS Call to the sandbox. This guide might help the user get over some of the similar kind of errors that the he/she might be experiencing during addition of an API Call to "Repy" Sandbox. To make things simpler we are going to assume that the user is making an API call for Repy that will fetch "Weather News" so the name of the user's own module/python_file that the user is working on is named "weather_report". The same module name will be used in the document for reference. 
 
@@ -192,10 +193,10 @@ This is a list of Errors I encountered during the addition of HTTPS Call to the 
   
 References:
   
-http://stackoverflow.com/questions/448271/what-is-init-py-for
-https://github.com/SeattleTestbed/repy_v2/issues/92
-http://mikegrouchy.com/blog/2012/05/be-pythonic-__init__py.html
-http://stackoverflow.com/questions/1944625/what-is-the-relationship-between-getattr-and-getattr https://docs.python.org/3/tutorial/modules.html
-https://github.com/burnash/gspread/issues/223
-https://github.com/burnash/gspread/pull/228
-https://www.python.org/dev/peps/pep-0476/#opting-out
+http://stackoverflow.com/questions/448271/what-is-init-py-for  
+https://github.com/SeattleTestbed/repy_v2/issues/92  
+http://mikegrouchy.com/blog/2012/05/be-pythonic-__init__py.html  
+http://stackoverflow.com/questions/1944625/what-is-the-relationship-between-getattr-and-getattr   https://docs.python.org/3/tutorial/modules.html  
+https://github.com/burnash/gspread/issues/223  
+https://github.com/burnash/gspread/pull/228  
+https://www.python.org/dev/peps/pep-0476/#opting-out  
