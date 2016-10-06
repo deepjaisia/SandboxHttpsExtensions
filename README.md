@@ -20,7 +20,7 @@ You have to install Repy before you can start using the call itself. This link :
 	
 2. Apache Server
 
-..* Installation      
+* Installation      
 
 This is not necessary to install, but if you want to make any changes and test out the call on your localsystem installing this server is the best option.
 
@@ -28,7 +28,7 @@ You can install Apache Server using the command given below in the Ubuntu Termin
 
 'sudo apt-get install apache2'
 
-..* Enabling SSL
+* Enabling SSL
 
 You would also need to enable SSL on the Apache server once you've installed it. The new Apache Server is packaged with SSL Support so there is no need to dive into the configuration files like we had to in the early days. There are set of 3 commands that will help you enable SSL on Apache in no time. You could always follow this link (https://help.ubuntu.com/14.04/serverguide/httpd.html) if you need more info or you get lost.
 
@@ -38,13 +38,13 @@ sudo a2ensite default-ssl
 sudo service apache2 restart
 '''
 
-..* Adding files to Apache Server
+* Adding files to Apache Server
 
 When you have enabled SSL on Apache, the first thing that the user would be doing is adding some webpages or files to your own server and test out if the server is actually functioning properly. In order for that to happen the user has to add the files to a location on the machine from where the server could access the files. One thing to note is that the Apache Server can serve some of the basic file types by default like : .html, .txt, .py, .zip and some more.  For "apache2" the user can add the files to the following folder.  
 
 ->"/var/www/html"
 
-..* Creating Self-Signed Certificate for your Apache Server
+* Creating Self-Signed Certificate for your Apache Server
 
 Aapche comes with it's own server and key when you enable 'SSL' on Apache. But it doesn't stop the user from playing with their own Self-Signed Certificates for the server. This part of guide will help you on how you can create a Self-Signed Certificate and use that for your Apache Server. We are going to use OpenSSL from the terminal window to create the certificate and then some minor modifications to the configuration file of the Server will get you up and running in no time.
 
@@ -78,40 +78,38 @@ SSLCertificateKeyFile   /home/frostbyte/mysite.pem
 
 After changing the locations for both the files, just save the configuration file. We have successfully now configured SSL on Apache Server using our Self-Signed Certificate and Key.
 
-*****************************************************************************
-*httpsget('server_name', 'method', 'webpage_within_server', trust_on_server)*
-*****************************************************************************
+##httpsget('server_name', 'method', 'webpage_within_server', trust_on_server)
 
 ###Doc string:
 
--->Purpose:      
+1. Purpose:      
 Provides you with the content of the webpage that is stored at the address location of the webserver provided by the user. The content could be the source code of the webpage, a text document or even a zip file.
 
--->Arguments:      
-->server_name : The name of the server needs to be specified. It could be 'https://google.com' or any other website. It can also be your 'localhost' server.
+2. Arguments:      
+* server_name : The name of the server needs to be specified. It could be 'https://google.com' or any other website. It can also be your 'localhost' server.
 
-->method : It is used to specify which method do you want to use when fetching contents from server using this API Call. It can be 'GET' or 'PUT'. 'GET' is working for now but functionality for 'PUT' still needs to be tested out.
+* method : It is used to specify which method do you want to use when fetching contents from server using this API Call. It can be 'GET' or 'PUT'. 'GET' is working for now but functionality for 'PUT' still needs to be tested out.
 
-->webpage_within_server : This is used to give the name of the webpage that the user wants to get the information of. It can be left blank or you can input '/', if there is no specific webpage that the user is hunting for within the server.
+* webpage_within_server : This is used to give the name of the webpage that the user wants to get the information of. It can be left blank or you can input '/', if there is no specific webpage that the user is hunting for within the server.
 
-->trust_on_server : It is a boolean value (True/False). If the user wants to trust the server and has the certificate for the particular server he/she is connecting then he/she can put 'True' in this field (Eg. Connecting to localhost or some known local servers). But if the server is unknown it is better to fill the field with 'False' (Eg. Connecting to servers on the internet like 'Google', 'Yahoo', 'YouTube').
-
-
--->Exceptions:      
--> NameError : If the boolean expression of "trust_on_server" field is inappropriate      
--> SSLError : If the SSL certificate of the user is not genuine.
+* trust_on_server : It is a boolean value (True/False). If the user wants to trust the server and has the certificate for the particular server he/she is connecting then he/she can put 'True' in this field (Eg. Connecting to localhost or some known local servers). But if the server is unknown it is better to fill the field with 'False' (Eg. Connecting to servers on the internet like 'Google', 'Yahoo', 'YouTube').
 
 
--->Side Effects      
-None so far.
+3. Exceptions:      
+* NameError : If the boolean expression of "trust_on_server" field is inappropriate      
+* SSLError : If the SSL certificate of the user is not genuine.
 
--->Returns      
-1. The status of the server      
-2. The contents of the webpage that is requested within the webserver.
+
+4. Side Effects      
+* None so far.
+
+5. Returns      
+* The status of the server      
+* The contents of the webpage that is requested within the webserver.
 
 ###Example:
 
-1> Here is a little example on how you can use the function call and use it to your benefit so you can download the contents of a website or you can even download a zip file from the server and save it on your computer.
+1. Here is a little example on how you can use the function call and use it to your benefit so you can download the contents of a website or you can even download a zip file from the server and save it on your computer.
 
 '''
 a, b = httpsget('localhost', 'GET', '/test_https.py.zip', True)      
@@ -130,7 +128,7 @@ We are using 'GET' method over here. We are also giving a boolean value 'True' s
 
 We are using the other Repy API Calls to write the contents that we fetched from the server to a file.
 
-2> This is an another example where if the user wants to just want to see the HTML content of any webpage on the internet.
+2. This is an another example where if the user wants to just want to see the HTML content of any webpage on the internet.
 
 '''
 a, b = httpsget('www.google.com', 'GET', '/', False)      
