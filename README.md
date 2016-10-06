@@ -16,67 +16,67 @@ Before we start to use the function call we need to install some things first. T
 
 1. Repy
 
-You have to install Repy before you can start using the call itself. This link : "https://seattle.poly.edu/wiki/RepyV2Tutorial" provides gives a small tour to the Sandbox and the installation procedure as well. Once you are done with the setup of "Repy"
+   You have to install Repy before you can start using the call itself. This link :                                            "https://seattle.poly.edu/wiki/RepyV2Tutorial" provides gives a small tour to the Sandbox and the installation procedure    as well. Once you are done with the setup of "Repy"
 	
 2. Apache Server
 
 * Installation      
 
-This is not necessary to install, but if you want to make any changes and test out the call on your localsystem installing this server is the best option.
+   This is not necessary to install, but if you want to make any changes and test out the call on your localsystem              installing this server is the best option.
 
-You can install Apache Server using the command given below in the Ubuntu Terminal or download it from this link (https://httpd.apache.org/download.cgi) according to your Operating System.
+   You can install Apache Server using the command given below in the Ubuntu Terminal or download it from this link            (https://httpd.apache.org/download.cgi) according to your Operating System.
 
-'sudo apt-get install apache2'
+   'sudo apt-get install apache2'
 
 * Enabling SSL
 
-You would also need to enable SSL on the Apache server once you've installed it. The new Apache Server is packaged with SSL Support so there is no need to dive into the configuration files like we had to in the early days. There are set of 3 commands that will help you enable SSL on Apache in no time. You could always follow this link (https://help.ubuntu.com/14.04/serverguide/httpd.html) if you need more info or you get lost.
+   You would also need to enable SSL on the Apache server once you've installed it. The new Apache Server is packaged with      SSL Support so there is no need to dive into the configuration files like we had to in the early days. There are set of 3    commands that will help you enable SSL on Apache in no time. You could always follow this link                              (https://help.ubuntu.com/14.04/serverguide/httpd.html) if you need more info or you get lost.
 
-'''
-sudo a2endmod ssl                
-sudo a2ensite default-ssl      
-sudo service apache2 restart
-'''
+   '''
+   sudo a2endmod ssl                
+   sudo a2ensite default-ssl      
+   sudo service apache2 restart
+   '''
 
 * Adding files to Apache Server
 
-When you have enabled SSL on Apache, the first thing that the user would be doing is adding some webpages or files to your own server and test out if the server is actually functioning properly. In order for that to happen the user has to add the files to a location on the machine from where the server could access the files. One thing to note is that the Apache Server can serve some of the basic file types by default like : .html, .txt, .py, .zip and some more.  For "apache2" the user can add the files to the following folder.  
+   When you have enabled SSL on Apache, the first thing that the user would be doing is adding some webpages or files to        your own server and test out if the server is actually functioning properly. In order for that to happen the user has to    add the files to a location on the machine from where the server could access the files. One thing to note is that the      Apache Server can serve some of the basic file types by default like : .html, .txt, .py, .zip and some more.  For            "apache2" the user can add the files to the following folder.  
 
-->"/var/www/html"
+   ->"/var/www/html"
 
 * Creating Self-Signed Certificate for your Apache Server
 
-Aapche comes with it's own server and key when you enable 'SSL' on Apache. But it doesn't stop the user from playing with their own Self-Signed Certificates for the server. This part of guide will help you on how you can create a Self-Signed Certificate and use that for your Apache Server. We are going to use OpenSSL from the terminal window to create the certificate and then some minor modifications to the configuration file of the Server will get you up and running in no time.
+   Aapche comes with it's own server and key when you enable 'SSL' on Apache. But it doesn't stop the user from playing with    their own Self-Signed Certificates for the server. This part of guide will help you on how you can create a Self-Signed      Certificate and use that for your Apache Server. We are going to use OpenSSL from the terminal window to create the          certificate and then some minor modifications to the configuration file of the Server will get you up and running in no      time.
 
-For the certificate, just run the following command in the terminal window. You will come across some fields that you have to fill out.
+   For the certificate, just run the following command in the terminal window. You will come across some fields that you        have to fill out.
 
-Note : Remember the certificate password as it will be used everytime you restart the service for the server.
+   Note : Remember the certificate password as it will be used everytime you restart the service for the server.
 
-'''openssl req -x509 -newkey rsa:4096 -keyout mysite.pem -out mysite.pem -days 365'''
+   '''openssl req -x509 -newkey rsa:4096 -keyout mysite.pem -out mysite.pem -days 365'''
 
-This command will create a single .pem object which will contain the 'certificate' and the 'key'. Explanation of the different attributes used in the command is given below:
+   This command will create a single .pem object which will contain the 'certificate' and the 'key'. Explanation of the        different attributes used in the command is given below:
 
--newkey : This specifies that by using which algorithm we are going to create the key of the specified size. In this case it is RSA of 4096 bits.
+   -newkey : This specifies that by using which algorithm we are going to create the key of the specified size. In this case    it is RSA of 4096 bits.
 
--keyout : This specifies the name of the key that would be created. It can be '.key' object as well but for this case we are going to take a '.pem' object.
+   -keyout : This specifies the name of the key that would be created. It can be '.key' object as well but for this case we    are going to take a '.pem' object.
 
--out : This specifies the name of the certificate that would be created. It can be a '.crt' object also but for this case we are going to take a '.pem' object.
+   -out : This specifies the name of the certificate that would be created. It can be a '.crt' object also but for this case    we are going to take a '.pem' object.
 
--days : This specifies the number of days for which the certificate will be valid for. It is 365 days in this case.
+   -days : This specifies the number of days for which the certificate will be valid for. It is 365 days in this case.
  
-We are now almost there, we have created a Self-Signed Certifcate and now all that we have to do is make Apache Server find this certificate and use this as default. Firstly we have to find the configuration file and then edit it. Mostly for Ubuntu users you could find the configuration file at this location : '/etc/apache2/sites-enabled/default-ssl.conf'. 
+   We are now almost there, we have created a Self-Signed Certifcate and now all that we have to do is make Apache Server      find this certificate and use this as default. Firstly we have to find the configuration file and then edit it. Mostly      for Ubuntu users you could find the configuration file at this location : '/etc/apache2/sites-enabled/default-ssl.conf'. 
 
-'default-ssl.conf' is the configuration file that we are looking for. Upon opening up the file in a text editor we have to search for the following lines in the configuration file :  
+   'default-ssl.conf' is the configuration file that we are looking for. Upon opening up the file in a text editor we have      to search for the following lines in the configuration file :  
 
-SSLCertificateFile	/etc/ssl/certs/ssl-cert-snakeoil.pem       
-SSLCertificateKeyFile   /etc/ssl/private/ssl-cert-snakeoil.key
+   SSLCertificateFile	   /etc/ssl/certs/ssl-cert-snakeoil.pem       
+   SSLCertificateKeyFile   /etc/ssl/private/ssl-cert-snakeoil.key
 
-We replace the location of the SSLCertificateFile and the SSLCertificateKeyFile to the location where we saved our own Self-Signed Certificate and Key. The location for the 'Self-Signed Certificate' and 'Key File' will be the same directory where the user ran their "OpenSSL" command in the terminal. The user can check their current directory by typing 'pwd' in the terminal. The location for me in this case was 'Home' so I changed the location for the SSLCertificateFile and SSLCertificateKeyFile as follows:        
+   We replace the location of the SSLCertificateFile and the SSLCertificateKeyFile to the location where we saved our own      Self-Signed Certificate and Key. The location for the 'Self-Signed Certificate' and 'Key File' will be the same directory    where the user ran their "OpenSSL" command in the terminal. The user can check their current directory by typing 'pwd' in    the terminal. The location for me in this case was 'Home' so I changed the location for the SSLCertificateFile and          SSLCertificateKeyFile as follows:        
 
-SSLCertificateFile	/home/frostbyte/mysite.pem       
-SSLCertificateKeyFile   /home/frostbyte/mysite.pem       
+   SSLCertificateFile	   /home/frostbyte/mysite.pem       
+   SSLCertificateKeyFile   /home/frostbyte/mysite.pem       
 
-After changing the locations for both the files, just save the configuration file. We have successfully now configured SSL on Apache Server using our Self-Signed Certificate and Key.
+   After changing the locations for both the files, just save the configuration file. We have successfully now configured      SSL on Apache Server using our Self-Signed Certificate and Key.
 
 ##httpsget('server_name', 'method', 'webpage_within_server', trust_on_server)
 
