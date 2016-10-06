@@ -78,9 +78,9 @@ Before we start to use the function call we need to install some things first. T
 
    After changing the locations for both the files, just save the configuration file. We have successfully now configured      SSL on Apache Server using our Self-Signed Certificate and Key.
 
-##httpsget('server_name', 'method', 'webpage_within_server', trust_on_server)
+##[httpsget('server_name', 'method', 'webpage_within_server', trust_on_server)]
 
-###Doc string:
+###Doc String:
 
 1. Purpose:      
 
@@ -149,7 +149,7 @@ Before we start to use the function call we need to install some things first. T
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 
-#HELP GUIDE
+#Help Guide
 
 This is a list of Errors I encountered during the addition of HTTPS Call to the sandbox. This guide might help the user get over some of the similar kind of errors that the he/she might be experiencing during addition of an API Call to "Repy" Sandbox. To make things simpler we are going to assume that the user is making an API call for Repy that will fetch "Weather News" so the name of the user's own module/python_file that the user is working on is named "weather_report". The same module name will be used in the document for reference. 
 
@@ -167,20 +167,22 @@ This is a list of Errors I encountered during the addition of HTTPS Call to the 
    
    In this case the module is 'ascii' within the 'encodings' module. We 'import' this module to "weather_report" file. To      alleviate this error, we will add the following line to "weather_report":
    
-   import encodings.ascii
+   ```import encodings.ascii```
    
    or
    
-   from encodings import ascii
+   ```from encodings import ascii```
    
    **AVOID USING :** 
    
-   from encodings import * 
+   ```from encodings import *```
+   
    Do not use this because it makes it difficult to determine where a particular function or attribute came from, and          makes debugging difficult. This also imports all names except those beginning with an underscore (_)
    
    b. Add the following line of code to your own module
    
    ```module_name.getattr = getattr```
+   
    Where module_name = The name of the module which gives the getattr/hasattr/__import__ error.
    
    This technique is called monkey-patching. You could read about this over here                                                (http://stackoverflow.com/questions/5626193/what-is-a-    monkey-patch) or Wikipedia is the best place to look and          understand. 
@@ -192,7 +194,7 @@ This is a list of Errors I encountered during the addition of HTTPS Call to the 
    The module name in the above case is "ssl" so we will add the following line of code to "weather_report" file:-
    'ssl.getattr = getattr' 
   
-  This same strategy could be adopted for any other "Unsafe Call" errors that are encountered while making your own API call   for the 'repyV2' sandbox. There is no surity that it will work for sure and use it at your own risk.
+   This same strategy could be adopted for any other "Unsafe Call" errors that are encountered while making your own API        call for the 'repyV2' sandbox. There is no surity that it will work for sure and use it at your own risk.
   
 #References:
   
