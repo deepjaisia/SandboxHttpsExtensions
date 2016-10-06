@@ -115,37 +115,37 @@ Before we start to use the function call we need to install some things first. T
 
 1. Here is a little example on how you can use the function call and use it to your benefit so you can download the contents of a website or you can even download a zip file from the server and save it on your computer.
 
-'''
-a, b = httpsget('localhost', 'GET', '/test_https.py.zip', True)      
-log(a, b, "\n")      
-file2 = openfile('asdf', True)      
-file2.writeat(b,0)
-'''
+  '''
+  a, b = httpsget('localhost', 'GET', '/test_https.py.zip', True)      
+  log(a, b, "\n")      
+  file2 = openfile('asdf', True)      
+  file2.writeat(b,0)
+  '''
 
-The user can use this as a test code and save it with '.r2py' extension for usage. To run this program the user can type the following line in the terminal. The user should run the program in 'sudo' mode if "Permission Denied" error pops up during running the code. If this doesn't help it might be an restriction within "Repy" Sandbox itself. We are going to assume that the user saves the file with the name "test_https.r2py".
+  The user can use this as a test code and save it with '.r2py' extension for usage. To run this program the user can type     the following line in the terminal. The user should run the program in 'sudo' mode if "Permission Denied" error pops up     during running the code. If this doesn't help it might be an restriction within "Repy" Sandbox itself. We are going to       assume that the user saves the file with the name "test_https.r2py".
 
-'''sudo python repy.py restrictions.test test_https.r2py'''
+  '''sudo python repy.py restrictions.test test_https.r2py'''
 
-Since we know that the API Call returns two values therefore that's the reason we have two variables "'a' and 'b'". 'a' gives us the status of the website and 'b' returns the content of the webpage that we have requested from the server 'localost' which is "/test_https.py.zip". And from this we can conclude that we are requesting a zip file from the server stored at that location. 
+  Since we know that the API Call returns two values therefore that's the reason we have two variables "'a' and 'b'". 'a'     gives us the status of the website and 'b' returns the content of the webpage that we have requested from the server         'localost' which is "/test_https.py.zip". And from this we can conclude that we are requesting a zip file from the server   stored at that location. 
 
-We are using 'GET' method over here. We are also giving a boolean value 'True' since we trust the server in this case. Use 'False' in the last field if you are connecting to some unknown server.
+  We are using 'GET' method over here. We are also giving a boolean value 'True' since we trust the server in this case. Use   'False' in the last field if you are connecting to some unknown server.
 
-We are using the other Repy API Calls to write the contents that we fetched from the server to a file.
+  We are using the other Repy API Calls to write the contents that we fetched from the server to a file.
 
 2. This is an another example where if the user wants to just want to see the HTML content of any webpage on the internet.
 
-'''
-a, b = httpsget('www.google.com', 'GET', '/', False)      
-log(a, b, "\n")      
-file2 = openfile('asdf', True)      
-file2.writeat(b,0)
-'''
+  '''
+  a, b = httpsget('www.google.com', 'GET', '/', False)      
+  log(a, b, "\n")      
+  file2 = openfile('asdf', True)      
+  file2.writeat(b,0)
+  '''
 
-The user can use this as a test code and save it with '.r2py' extension for usage. To run this program the user can type the following line in the terminal. The user should run the program in 'sudo' mode if "Permission Denied" error pops up during running the code. If this doesn't help it might be an restriction within "Repy" Sandbox itself. We are going to assume that the user saves the file with the name "test_https.r2py".
+  The user can use this as a test code and save it with '.r2py' extension for usage. To run this program the user can type     the following line in the terminal. The user should run the program in 'sudo' mode if "Permission Denied" error pops up     during running the code. If this doesn't help it might be an restriction within "Repy" Sandbox itself. We are going to       assume that the user saves the file with the name "test_https.r2py".
 
-'''sudo python repy.py restrictions.test test_https.r2py'''
+  '''sudo python repy.py restrictions.test test_https.r2py'''
 
-This 'Repy' program returns the content of the webpage 'www.google.com' and then displays the content of the webpage and also write the same output to the file which is named 'asdf'. See how we put 'False' in the last field of the 'httpsget' call in the first line of the program, that is because we don't know if the server on the internet is certified or not.
+  This 'Repy' program returns the content of the webpage 'www.google.com' and then displays the content of the webpage and     also write the same output to the file which is named 'asdf'. See how we put 'False' in the last field of the 'httpsget'     call in the first line of the program, that is because we don't know if the server on the internet is certified or not.
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 
