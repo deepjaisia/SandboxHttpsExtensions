@@ -42,7 +42,7 @@ Before we start to use the function call we need to install some things first. T
 
    When you have enabled SSL on Apache, the first thing that the user would be doing is adding some webpages or files to        your own server and test out if the server is actually functioning properly. In order for that to happen the user has to    add the files to a location on the machine from where the server could access the files. One thing to note is that the      Apache Server can serve some of the basic file types by default like : .html, .txt, .py, .zip and some more.  For            "apache2" the user can add the files to the following folder.  
 
-   ->"/var/www/html"
+   **"/var/www/html"**
 
 * Creating Self-Signed Certificate for your Apache Server
 
@@ -56,25 +56,25 @@ Before we start to use the function call we need to install some things first. T
 
    This command will create a single .pem object which will contain the 'certificate' and the 'key'. Explanation of the        different attributes used in the command is given below:
 
-   -newkey : This specifies that by using which algorithm we are going to create the key of the specified size. In this case    it is RSA of 4096 bits.
+   **-newkey** : This specifies that by using which algorithm we are going to create the key of the specified size. In this      case it is RSA of 4096 bits.
 
-   -keyout : This specifies the name of the key that would be created. It can be '.key' object as well but for this case we    are going to take a '.pem' object.
+   **-keyout** : This specifies the name of the key that would be created. It can be '.key' object as well but for this case      we are going to take a '.pem' object.
 
-   -out : This specifies the name of the certificate that would be created. It can be a '.crt' object also but for this case    we are going to take a '.pem' object.
+   **-out** : This specifies the name of the certificate that would be created. It can be a '.crt' object also but for this      case we are going to take a '.pem' object.
 
-   -days : This specifies the number of days for which the certificate will be valid for. It is 365 days in this case.
+   **-days** : This specifies the number of days for which the certificate will be valid for. It is 365 days in this case.
  
    We are now almost there, we have created a Self-Signed Certifcate and now all that we have to do is make Apache Server      find this certificate and use this as default. Firstly we have to find the configuration file and then edit it. Mostly      for Ubuntu users you could find the configuration file at this location : '/etc/apache2/sites-enabled/default-ssl.conf'. 
 
    'default-ssl.conf' is the configuration file that we are looking for. Upon opening up the file in a text editor we have      to search for the following lines in the configuration file :  
 
-   SSLCertificateFile	   /etc/ssl/certs/ssl-cert-snakeoil.pem       
-   SSLCertificateKeyFile   /etc/ssl/private/ssl-cert-snakeoil.key
+   **SSLCertificateFile	     /etc/ssl/certs/ssl-cert-snakeoil.pem**       
+   **SSLCertificateKeyFile   /etc/ssl/private/ssl-cert-snakeoil.key**
 
    We replace the location of the SSLCertificateFile and the SSLCertificateKeyFile to the location where we saved our own      Self-Signed Certificate and Key. The location for the 'Self-Signed Certificate' and 'Key File' will be the same directory    where the user ran their "OpenSSL" command in the terminal. The user can check their current directory by typing 'pwd' in    the terminal. The location for me in this case was 'Home' so I changed the location for the SSLCertificateFile and          SSLCertificateKeyFile as follows:        
 
-   SSLCertificateFile	   /home/frostbyte/mysite.pem       
-   SSLCertificateKeyFile   /home/frostbyte/mysite.pem       
+   **SSLCertificateFile	     /home/frostbyte/mysite.pem**       
+   **SSLCertificateKeyFile   /home/frostbyte/mysite.pem**       
 
    After changing the locations for both the files, just save the configuration file. We have successfully now configured      SSL on Apache Server using our Self-Signed Certificate and Key.
 
@@ -83,29 +83,33 @@ Before we start to use the function call we need to install some things first. T
 ###Doc string:
 
 1. Purpose:      
-Provides you with the content of the webpage that is stored at the address location of the webserver provided by the user. The content could be the source code of the webpage, a text document or even a zip file.
+
+  Provides you with the content of the webpage that is stored at the address location of the webserver provided by the         user. The content could be the source code of the webpage, a text document or even a zip file.
 
 2. Arguments:      
-* server_name : The name of the server needs to be specified. It could be 'https://google.com' or any other website. It can also be your 'localhost' server.
 
-* method : It is used to specify which method do you want to use when fetching contents from server using this API Call. It can be 'GET' or 'PUT'. 'GET' is working for now but functionality for 'PUT' still needs to be tested out.
+  * server_name : The name of the server needs to be specified. It could be 'https://google.com' or any other website. It     can also be your 'localhost' server.
 
-* webpage_within_server : This is used to give the name of the webpage that the user wants to get the information of. It can be left blank or you can input '/', if there is no specific webpage that the user is hunting for within the server.
+  * method : It is used to specify which method do you want to use when fetching contents from server using this API Call.     It can be 'GET' or 'PUT'. 'GET' is working for now but functionality for 'PUT' still needs to be tested out.
 
-* trust_on_server : It is a boolean value (True/False). If the user wants to trust the server and has the certificate for the particular server he/she is connecting then he/she can put 'True' in this field (Eg. Connecting to localhost or some known local servers). But if the server is unknown it is better to fill the field with 'False' (Eg. Connecting to servers on the internet like 'Google', 'Yahoo', 'YouTube').
+  * webpage_within_server : This is used to give the name of the webpage that the user wants to get the information of. It     can be left blank or you can input '/', if there is no specific webpage that the user is hunting for within the server.
+
+  * trust_on_server : It is a boolean value (True/False). If the user wants to trust the server and has the certificate for   the particular server he/she is connecting then he/she can put 'True' in this field (Eg. Connecting to localhost or some     known local servers). But if the server is unknown it is better to fill the field with 'False' (Eg. Connecting to servers   on the internet like 'Google', 'Yahoo', 'YouTube').
 
 
 3. Exceptions:      
-* NameError : If the boolean expression of "trust_on_server" field is inappropriate      
-* SSLError : If the SSL certificate of the user is not genuine.
 
+  * NameError : If the boolean expression of "trust_on_server" field is inappropriate      
+  * SSLError : If the SSL certificate of the user is not genuine.
 
 4. Side Effects      
-* None so far.
+
+  * None so far.
 
 5. Returns      
-* The status of the server      
-* The contents of the webpage that is requested within the webserver.
+ 
+  * The status of the server      
+  * The contents of the webpage that is requested within the webserver.
 
 ###Example:
 
