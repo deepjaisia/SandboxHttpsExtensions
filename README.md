@@ -161,40 +161,43 @@ This is a list of Errors I encountered during the addition of HTTPS Call to the 
 
    a. The first approach should be to 'import' the module that is giving you error to your "weather_report" file.
 
-   Eg.)
+     Eg.)
   
-   Unsafe call: ("Unsafe call '__import__' with args '('encodings.ascii',)', kwargs '{'fromlist': ['*'], 'level': 0}'",)
+       Unsafe call: ("Unsafe call '__import__' with args '('encodings.ascii',)', kwargs '{'fromlist': ['*'], 'level': 0}'",)
    
-   In this case the module is 'ascii' within the 'encodings' module. We 'import' this module to "weather_report" file. To      alleviate this error, we will add the following line to "weather_report":
+       In this case the module is 'ascii' within the 'encodings' module. We 'import' this module to "weather_report" file.          To alleviate this error, we will add the following line to "weather_report":
    
-   ```import encodings.ascii```
+       ```import encodings.ascii```
    
-   or
+       or
    
-   ```from encodings import ascii```
+       ```from encodings import ascii```
    
-   **AVOID USING :** 
+       **AVOID USING :** 
    
-   ```from encodings import *```
+       ```from abc import *```
+       
+       Where 'abc' is any module that the user wants to import.
    
-   Do not use this because it makes it difficult to determine where a particular function or attribute came from, and          makes debugging difficult. This also imports all names except those beginning with an underscore (_)
+       Do not use this kind of import for any kind of module because it makes it difficult to determine where a particular          function or attribute came from, and makes debugging difficult. This also imports all names except those                    beginning with an underscore (_)
    
    b. Add the following line of code to your own module
    
-   ```module_name.getattr = getattr```
+     ```module_name.getattr = getattr```
    
-   Where module_name = The name of the module which gives the getattr/hasattr/__import__ error.
+     Where module_name = The name of the module which gives the getattr/hasattr/__import__ error.
    
-   This technique is called monkey-patching. You could read about this over here                                                (http://stackoverflow.com/questions/5626193/what-is-a-    monkey-patch) or Wikipedia is the best place to look and          understand. 
+     This technique is called monkey-patching. You could read about this over here                                                (http://stackoverflow.com/questions/5626193/what-is-a-    monkey-patch) or Wikipedia is the best place to look and          understand. 
 
-   Eg.)
+     Eg.)
    
-   Unsafe call: ("Unsafe call 'getattr' with args '(<module '_ssl' from '/usr/lib/python2.7/lib-dynload/_ssl.x86_64-linux-      gnu.so'>,'OP_NO_COMPRESSION', 0)', kwargs '{}'",)
+       Unsafe call: ("Unsafe call 'getattr' with args '(<module '_ssl' from '/usr/lib/python2.7/lib-dynload/_ssl.x86_64-            linux-gnu.so'>,'OP_NO_COMPRESSION', 0)', kwargs '{}'",)
 
-   The module name in the above case is "ssl" so we will add the following line of code to "weather_report" file:-
-   'ssl.getattr = getattr' 
+       The module name in the above case is "ssl" so we will add the following line of code to "weather_report" file:-
+     
+       ```ssl.getattr = getattr``` 
   
-   This same strategy could be adopted for any other "Unsafe Call" errors that are encountered while making your own API        call for the 'repyV2' sandbox. There is no surity that it will work for sure and use it at your own risk.
+       This same strategy could be adopted for any other "Unsafe Call" errors that are encountered while making your own API        call for the 'repyV2' sandbox. There is no surity that it will work for sure and use it at your own risk.
   
 #References:
   
