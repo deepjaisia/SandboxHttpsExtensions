@@ -67,7 +67,7 @@ Before we start to use the function call we need to install some things first. T
    We are now almost there, we have created a Self-Signed Certifcate and now all that we have to do is make Apache Server      find this certificate and use this as default. Firstly we have to find the configuration file and then edit it. Mostly      for Ubuntu users you could find the configuration file at this location : '/etc/apache2/sites-enabled/default-ssl.conf'. 
 
    'default-ssl.conf' is the configuration file that we are looking for. Upon opening up the file in a text editor we have      to search for the following lines in the configuration file :  
-git clone -b add_test_call_to_sandbox https://github.com/deepjaisia/repy_v2.git
+
    **SSLCertificateFile	     /etc/ssl/certs/ssl-cert-snakeoil.pem**       
    **SSLCertificateKeyFile   /etc/ssl/private/ssl-cert-snakeoil.key**
 
@@ -77,30 +77,30 @@ git clone -b add_test_call_to_sandbox https://github.com/deepjaisia/repy_v2.git
    **SSLCertificateKeyFile   /home/frostbyte/mysite.pem**       
 
    After changing the locations for both the files, just save the configuration file. We have successfully now configured      SSL on Apache Server using our Self-Signed Certificate and Key.
-   
+
 3. Cloning Repository
 
-   If the user wants to use the call and make some testing they could clone the repository on their machine and then test it    out. The user can use the following command to Clone the repository to their machine. First thing to check is the current    directory that the user is working and make a new directory within the current one where the "RepyV2" will be stored. The    new directory that I would be making in this example would be "RepyTesting". 
+   If the user wants to use the call and make some testing they could clone the repository on their machine and then test      it out. The user can use the following command to Clone the repository to their machine. First thing to check is the        current directory that the user is working and make a new directory within the current one where the "RepyV2" will          be stored. The new directory that I would be making in this example would be "RepyTesting". 
    
-   '''mkdir RepyTesting'''
+   ```mkdir RepyTesting```
    
    After making a new directory we would move to the new directory where we would clone the repository.
    
-   '''cd RepyTesting'''
+   ```cd RepyTesting```
    
    Before using the command to clone the repo make sure you have 'git' installed on your machine. To install git the user      can use the command given below.
    
-   '''sudo apt-get install git'''
+   ```sudo apt-get install git```
    
    After we have 'git' on our machine we could go about and clone the repo.
    
-   '''git clone -b name_of_branch https://github.com/username/NameOfRepo.git'''
+   ```git clone -b name_of_branch https://github.com/username/name_of_repo.git```
    
    The user can skip '-b name_of_branch' attribute to the git command if he/she wants to clone the "Master" branch. 
    
-   name_of_branch : Specific branch that the user wants to clone
-   username : User Name of the github account from where the user wants to clone the repo.
-   NameOfRepo : Name of the main repository.
+   name_of_branch : Specific branch that the user wants to clone.    
+   username : User Name of the github account from where the user wants to clone the repo.  
+   name_of_repo : Name of the main repository.  
 
 ##[httpsget('server_name', 'method', 'webpage_within_server', trust_on_server)]
 
