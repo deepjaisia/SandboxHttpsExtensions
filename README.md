@@ -101,6 +101,10 @@ Before we start to use the function call we need to install some things first. T
    name_of_branch : Specific branch that the user wants to clone.    
    username : User Name of the github account from where the user wants to clone the repo.  
    name_of_repo : Name of the main repository.  
+   
+   The command in this case being where you want to download "Repy" with the 'httpsget' call is as follows.
+   
+   ```git clone -b add_test_call_to_sandbox https://github.com/deepjaisia/repy_v2.git```
 
 ##[httpsget('server_name', 'method', 'webpage_within_server', trust_on_server)]
 
