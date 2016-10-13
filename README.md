@@ -77,8 +77,8 @@ Before we start to use the function call we need to install some things first. T
    **SSLCertificateKeyFile   /home/frostbyte/mysite.pem**       
 
    After changing the locations for both the files, just save the configuration file. We have successfully now configured      SSL on Apache Server using our Self-Signed Certificate and Key.
-
-3. Cloning Repository
+   
+   3. Cloning Repository
 
    If the user wants to use the call and make some testing they could clone the repository on their machine and then test      it out. The user can use the following command to Clone the repository to their machine. First thing to check is the        current directory that the user is working and make a new directory within the current one where the "RepyV2" will          be stored. The new directory that I would be making in this example would be "RepyTesting". 
    
