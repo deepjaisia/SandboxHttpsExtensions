@@ -147,20 +147,24 @@ Before we start to use the function call we need to install some things first. T
 
 Below are some examples on how to use the httpsget and start downloading some files or content of a webpage from the server to your own folder. Before the user use the function call there are small prerequisite that needs to be fulfilled for proper functioning of the "localhost" server. The prereqs are listed below as follows :-
 
-a. If the user intend to use 'localhost' server for testing purposes he/she needs to follow the steps that are listed above on how to setup a local server for testing purposes. After the server is completely setup and the user is ready to perform some tests, he/she needs to **copy and save** the certificate that they are using in the same directory they are running "Repy" from which in most cases would be the "RUNNABLE" directory. The gist is just save the certificate to the same directory that you are using for the Apache Server to the same directory. 
+a. 
+    If the user intend to use 'localhost' server for testing purposes he/she needs to follow the steps that are listed above on how to       setup a local server for testing purposes. After the server is completely setup and the user is ready to perform some tests, he/she     needs to **copy and save** the certificate that they are using in the same directory they are running "Repy" from which in most         cases would be the "RUNNABLE" directory. The gist is just save the certificate to the same directory that you are using for the         Apache Server to the same directory. 
 
-If the user is not using self-signed certificate then they could locate the default certificate that the Aapache Server is using for HTTPS. The location for the certificate can be found from the path defined in the "default-ssl.conf" file. The location for this file will be mainly "/etc/apache2/sites-enabled/default-ssl.conf" for most cases for Apache Server. We have to now search for the line of code within the "default-ssl" file to find the location of the certificate listed below: 
+    If the user is not using self-signed certificate then they could locate the default certificate that the Aapache Server is using for     HTTPS. The location for the certificate can be found from the path defined in the "default-ssl.conf" file. The location for this         file will be mainly "/etc/apache2/sites-enabled/default-ssl.conf" for most cases for Apache Server. We have to now search for the       line of code within the "default-ssl" file to find the location of the certificate listed below: 
 
-     **SSLCertificateFile      /etc/ssl/certs/ssl-cert-snakeoil.pem**       
-     **SSLCertificateKeyFile   /etc/ssl/private/ssl-cert-snakeoil.key**
+    **SSLCertificateFile      /etc/ssl/certs/ssl-cert-snakeoil.pem**       
+    **SSLCertificateKeyFile   /etc/ssl/private/ssl-cert-snakeoil.key**
      
-     From the above lines we know that the location for the certificate is "/etc/ssl/certs/ssl-cert-snakeoil.pem". Once we know the location for the "Certificate" we can copy the certificate to our destination folder. To perform the copy operation we can copy command from the terminal or a simple copy and paste from the GUI would also do. Anyways I'll provide the terminal command for the people who would still love to use the terminal for copying the contents. Firstly we have to navigate to the source directory for the "Certificate" from the terminal and the location for the certificate is showed above and this can be done using the command shown below. 
+    From the above lines we know that the location for the certificate is "/etc/ssl/certs/ssl-cert-snakeoil.pem". Once we know the           location for the "Certificate" we can copy the certificate to our destination folder. To perform the copy operation we can copy         command from the terminal or a simple copy and paste from the GUI would also do. Anyways I'll provide the terminal command for the       people who would still love to use the terminal for copying the contents. Firstly we have to navigate to the source directory for       the "Certificate" from the terminal and the location for the certificate is showed above and this can be done using the command         shown below. 
      
-     ```cd /etc/ssl/certs/ssl-cert-snakeoil.pem```
+    ```cd /etc/ssl/certs/ssl-cert-snakeoil.pem```
      
-     After navigating to the directory use the command below to copy the certificate.
+    After navigating to the directory use the command below to copy the certificate.
      
-     ```sudo cp ssl-cert
+    ```sudo cp ssl-cert-snakeoil.pem your_repy_runnable_directory```
+
+Below are some the examples on how you could use the call to implement simple programs that allow the user to download files that the 'localhost' server serves or the get the web content of a webpage. 
+     
 1. Here is a little example on how you can use the function call and use it to your benefit so you can download the contents of a website or you can even download a zip file from the server and save it on your computer.
 
   ```  
