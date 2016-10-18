@@ -52,13 +52,15 @@ Before we start to use the function call we need to install some things first. T
 
      Note : Remember the certificate password as it will be used everytime you restart the service for the server.
 
-     ```openssl req -x509 -newkey rsa:4096 -keyout mysite.pem -out mysite.pem -days 365```
+     ```openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout my_site.key -out my_site.crt```
 
      This command will create a single .pem object which will contain the 'certificate' and the 'key'. Explanation of the        different attributes used in the command is given below:
-
+     
+     **-x509** : This field outputs a x509 structure.
+     
      **-newkey** : This specifies that by using which algorithm we are going to create the key of the specified size. In          this case it is RSA of 4096 bits.
 
-     **-keyout** : This specifies the name of the key that would be created. It can be '.key' object as well but for this        case we are going to take a '.pem' object.
+     **-keyout** : This specifies the name of the key that would be created. It creates a '.key' object but it can also create '.pem' object.
 
      **-out** : This specifies the name of the certificate that would be created. It can be a '.crt' object also but for          this case we are going to take a '.pem' object.
 
@@ -73,8 +75,8 @@ Before we start to use the function call we need to install some things first. T
 
      We replace the location of the SSLCertificateFile and the SSLCertificateKeyFile to the location where we saved our own      Self-Signed Certificate and Key. The location for the 'Self-Signed Certificate' and 'Key File' will be the same              directory where the user ran their "OpenSSL" command in the terminal. The user can check their current directory by          typing 'pwd' in the terminal. The location for me in this case was 'Home' so I changed the location for the                  SSLCertificateFile and SSLCertificateKeyFile as follows:        
 
-     **SSLCertificateFile      /home/frostbyte/mysite.pem**       
-     **SSLCertificateKeyFile   /home/frostbyte/mysite.pem**       
+     **SSLCertificateFile      /home/frostbyte/my_site.crt**       
+     **SSLCertificateKeyFile   /home/frostbyte/my_site.key**       
 
      After changing the locations for both the files, just save the configuration file. We have successfully now configured      SSL on Apache Server using our Self-Signed Certificate and Key.
 
@@ -106,7 +108,7 @@ Before we start to use the function call we need to install some things first. T
    
    ```git clone -b add_test_call_to_sandbox https://github.com/deepjaisia/repy_v2.git```
 
-##[httpsget('server_name', 'method', 'webpage_within_server', trust_on_server)]
+##[httpsget('server_name', 'method', 'webpage_within_server', 'name_of_cert', trust_on_server)]
 
 ###Doc String:
 
@@ -121,6 +123,8 @@ Before we start to use the function call we need to install some things first. T
   * method : It is used to specify which method do you want to use when fetching contents from server using this API Call.     It can be 'GET' or 'PUT'. 'GET' is working for now but functionality for 'PUT' still needs to be tested out.
 
   * webpage_within_server : This is used to give the name of the webpage that the user wants to get the information of. It     can be left blank or you can input '/', if there is no specific webpage that the user is hunting for within the server.
+  
+  * name_of_cert : This field needs to be filled by the user and the he/she needs to specify the name of self-signed certificate they have used for their local server. Prequisite to this field requires the user to copy and save the self-signed certificate to the same folder from where they are running the "Repy" code.
 
   * trust_on_server : It is a boolean value (True/False). If the user wants to trust the server and has the certificate for   the particular server he/she is connecting then he/she can put 'True' in this field (Eg. Connecting to localhost or some     known local servers). But if the server is unknown it is better to fill the field with 'False' (Eg. Connecting to servers   on the internet like 'Google', 'Yahoo', 'YouTube').
 
@@ -141,10 +145,26 @@ Before we start to use the function call we need to install some things first. T
 
 ###Example:
 
+Below are some examples on how to use the httpsget and start downloading some files or content of a webpage from the server to your own folder. Before the user use the function call there are small prerequisite that needs to be fulfilled for proper functioning of the "localhost" server. The prereqs are listed below as follows :-
+
+a. If the user intend to use 'localhost' server for testing purposes he/she needs to follow the steps that are listed above on how to setup a local server for testing purposes. After the server is completely setup and the user is ready to perform some tests, he/she needs to **copy and save** the certificate that they are using in the same directory they are running "Repy" from which in most cases would be the "RUNNABLE" directory. The gist is just save the certificate to the same directory that you are using for the Apache Server to the same directory. 
+
+If the user is not using self-signed certificate then they could locate the default certificate that the Aapache Server is using for HTTPS. The location for the certificate can be found from the path defined in the "default-ssl.conf" file. The location for this file will be mainly "/etc/apache2/sites-enabled/default-ssl.conf" for most cases for Apache Server. We have to now search for the line of code within the "default-ssl" file to find the location of the certificate listed below: 
+
+     **SSLCertificateFile      /etc/ssl/certs/ssl-cert-snakeoil.pem**       
+     **SSLCertificateKeyFile   /etc/ssl/private/ssl-cert-snakeoil.key**
+     
+     From the above lines we know that the location for the certificate is "/etc/ssl/certs/ssl-cert-snakeoil.pem". Once we know the location for the "Certificate" we can copy the certificate to our destination folder. To perform the copy operation we can copy command from the terminal or a simple copy and paste from the GUI would also do. Anyways I'll provide the terminal command for the people who would still love to use the terminal for copying the contents. Firstly we have to navigate to the source directory for the "Certificate" from the terminal and the location for the certificate is showed above and this can be done using the command shown below. 
+     
+     ```cd /etc/ssl/certs/ssl-cert-snakeoil.pem```
+     
+     After navigating to the directory use the command below to copy the certificate.
+     
+     ```sudo cp ssl-cert
 1. Here is a little example on how you can use the function call and use it to your benefit so you can download the contents of a website or you can even download a zip file from the server and save it on your computer.
 
   ```  
-  a, b = httpsget('localhost', 'GET', '/test_https.py.zip', True)      
+  a, b = httpsget('localhost', 'GET', '/test_https.py.zip', 'my_site.crt', True)      
   log(a, b, "\n")      
   file2 = openfile('asdf', True)      
   file2.writeat(b,0)
@@ -163,7 +183,7 @@ Before we start to use the function call we need to install some things first. T
 2. This is an another example where if the user wants to just want to see the HTML content of any webpage on the internet.
 
   ```  
-  a, b = httpsget('www.google.com', 'GET', '/', False)      
+  a, b = httpsget('www.google.com', 'GET', '/', 'my_site.crt', False)      
   log(a, b, "\n")      
   file2 = openfile('asdf', True)      
   file2.writeat(b,0)
