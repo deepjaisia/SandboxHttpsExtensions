@@ -147,7 +147,7 @@ Before we start to use the function call we need to install some things first. T
 
 Below are some examples on how to use the httpsget and start downloading some files or content of a webpage from the server to your own folder. Before the user use the function call there are small prerequisite that needs to be fulfilled for proper functioning of the "localhost" server. The prereqs are listed below as follows :-
 
-a. 
+* 
     If the user intend to use 'localhost' server for testing purposes he/she needs to follow the steps that are listed above on how to       setup a local server for testing purposes. After the server is completely setup and the user is ready to perform some tests, he/she     needs to **copy and save** the certificate that they are using in the same directory they are running "Repy" from which in most         cases would be the "RUNNABLE" directory. The gist is just save the certificate to the same directory that you are using for the         Apache Server to the same directory. 
 
     If the user is not using self-signed certificate then they could locate the default certificate that the Aapache Server is using for     HTTPS. The location for the certificate can be found from the path defined in the "default-ssl.conf" file. The location for this         file will be mainly "/etc/apache2/sites-enabled/default-ssl.conf" for most cases for Apache Server. We have to now search for the       line of code within the "default-ssl" file to find the location of the certificate listed below: 
