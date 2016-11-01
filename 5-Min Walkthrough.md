@@ -58,3 +58,20 @@ Your output should be similar to this:
 ```
 
 Congratulations, you've just written your first program to use the HTTPS-enabled sandbox! This concludes the 5-minute walkthrough.
+
+
+##Knowing The Call
+
+   Now after completing the 5-Minute walkthrough successfully there might be some things that the user might be curious. We'll first go    through some of the parameters of the function call one by one below :-
+    
+   ##[httpsget('server_name', 'method', 'webpage_within_server', 'name_of_cert', trust_on_server)]      
+
+   * server_name : The name of the server needs to be specified. It could be 'https://google.com' or any other website. It can also        be your 'localhost' server.
+
+   * method : It is used to specify which method do you want to use when fetching contents from server using this API Call. It can be      'GET' or 'PUT'. 'GET' is working for now but functionality for 'PUT' still needs to be tested out.
+
+   * webpage_within_server : This is used to give the name of the webpage that the user wants to get the information of. It can be left    blank or you can input '/', if there is no specific webpage that the user is hunting for within the server.
+  
+   * name_of_cert : This field needs to be filled by the user and the he/she needs to specify the name of self-signed certificate they      have used for their local server. Prequisite to this field requires the user to copy and save the self-signed certificate to the        same folder from where they are running the "Repy" code.
+
+   * trust_on_server : It is a boolean value (True/False). If the user wants to trust the server and has the certificate for   the         particular server he/she is connecting then he/she can put 'True' in this field (Eg. Connecting to localhost or some     known local     servers). But if the server is unknown it is better to fill the field with 'False' (Eg. Connecting to servers   on the internet like     'Google', 'Yahoo', 'YouTube').
