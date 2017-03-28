@@ -2,6 +2,12 @@
 
 In this 5-minute walkthrough, we will check out the HTTPS-enabled RepyV2 sandbox and run a simple example script. We assume you have Git and Python 2 installed. The repo that we will be cloning will be is "https://github.com/deepjaisia/repy_v2.git". Clone the appropriate repo and build it (see the Seattle Testbed BuildInstructions [https://seattle.poly.edu/wiki/RepyV2Tutorial] for details):
 
+**Commands Used:**
+```
+git clone https://github.com/deepjaisia/repy_v2.git -b add_test_call_to_sandbox ./deep_repy_v2 
+```
+
+**Output you will see on your screen:**
 ```
 ~$ git clone https://github.com/deepjaisia/repy_v2.git -b add_test_call_to_sandbox ./deep_repy_v2  
 Cloning into './deep_repy_v2'...  
@@ -15,6 +21,15 @@ Checking connectivity... done.
  
 After cloning the repository to the **"deep_repy_v2"** directory we move into the directory where the repo is cloned and build repy_v2.
 
+**Commands Used:**
+```
+cd ./deep_repy_v2
+cd scripts/
+python initialize.py
+python build.py
+```
+
+**Output you will see on your screen:**
 ```~$ cd ./deep_repy_v2  
 ~/deep_repy_v2$ cd scripts/  
 ~/deep_repy_v2/scripts$ python initialize.py   
@@ -31,7 +46,7 @@ Done!
 Checking out repo from https://github.com/SeattleTestbed/utf ...  
 Done!  
 ~/deep_repy_v2/scripts$ python build.py   
-Building into /home/albert/deep_repy_v2/RUNNABLE  
+Building into /home/frostbyte/deep_repy_v2/RUNNABLE  
 Done building!
 ```  
 
@@ -67,7 +82,7 @@ Congratulations, you've just written your first program to use the HTTPS-enabled
 
 ## Advanced
 
-After completing a 5-minute Tutorial we will now see how to use the call and host a server and use the server for fetching files from the server. A detailed step by step guide is provided here(https://github.com/deepjaisia/SandboxHttpsExtensions/blob/master/README.md) on how to setup the localhost server and how to create a self-signed certificate and start using the server for hosting files and use the call functionality to check the authenticity of the server. To run some of the examples below you might need to setup a "localhost" server and create a self-signed certificate.
+After completing a 5-minute Tutorial we will now see how to use the call and host a server and use the server for fetching files from the server. A detailed step by step guide is provided here (https://github.com/deepjaisia/SandboxHttpsExtensions/blob/master/README.md) on how to setup the localhost server and how to create a self-signed certificate and start using the server for hosting files and use the call functionality to check the authenticity of the server. To run some of the examples below you might need to setup a "localhost" server and create a self-signed certificate.
 
 ## Examples
 
