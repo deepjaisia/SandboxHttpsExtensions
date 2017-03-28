@@ -1,16 +1,16 @@
-#SandboxHttpsExtensions
+# SandboxHttpsExtensions
 
 Augment the current sandbox API to allow HTTPS (or TLS/SSL) function calls from the Python libraries to be used in a secure, performance-isolated fashion inside of Repy.
 
-##"httpsget" Tutorial
+## "httpsget" Tutorial
 
-###Introduction
+### Introduction
 
 This guide gives an introduction about the function call as well as its usage, the function call can be used by the client to download files from a sever (Apache server in this case). The manual can also be used as a guide on how to create a function call for yourself in the RepyV2 Sandbox. The commands used in this manual are created with reference to "UBUNTU 16.04" OS, but it can also be used with "Windows 10" OS since recently "Bash" support has been released for Windows.
 
 It is assumed you have some basic knowledge of ports, self-signed certificate, certificate verification, "Apache" webserver. Lastly, a pretty basic understanding of Python Programming language is also required. The tutorial over [here]("http://www.python.org/doc/") might help you brush up with some basic concepts and get you started ASAP or you could always try "CodeAcademy" or "Learning Python the Hard Way" if you feel like you want to dwelve more into python and have time at hand. You do not have to be an expert at Python, but being able to write a simple program in Python is essential.
 
-###General Operation
+### General Operation
 
 Before we start to use the function call we need to install some things first. The list with details is shown below:-
 
@@ -33,7 +33,7 @@ Before we start to use the function call we need to install some things first. T
      You would also need to enable SSL on the Apache server once you've installed it. The new Apache Server is packaged with      SSL Support so there is no need to dive into the configuration files like we had to in the early days. There are set of      3 commands that will help you enable SSL on Apache in no time. You could always follow this link                            (https://help.ubuntu.com/14.04/serverguide/httpd.html) if you need more info or you get lost.
 
      ```
-     sudo a2endmod ssl                
+     sudo a2enmod ssl                
      sudo a2ensite default-ssl      
      sudo service apache2 restart
      ```
@@ -108,9 +108,9 @@ Before we start to use the function call we need to install some things first. T
    
    ```git clone -b add_test_call_to_sandbox https://github.com/deepjaisia/repy_v2.git```
 
-##[httpsget('server_name', 'method', 'webpage_within_server', 'name_of_cert', trust_on_server)]
+### [httpsget('server_name', 'method', 'webpage_within_server', 'name_of_cert', trust_on_server)]
 
-###Doc String:
+### Doc String:
 
 1. Purpose:      
 
@@ -143,7 +143,7 @@ Before we start to use the function call we need to install some things first. T
   * The status of the server      
   * The contents of the webpage that is requested within the webserver.
 
-###Example:
+## Example:
 
 Below are some examples on how to use the httpsget and start downloading some files or content of a webpage from the server to your own folder. Before the user use the function call there are small prerequisite that needs to be fulfilled for proper functioning of the "localhost" server. The prereqs are listed below as follows :-
 
@@ -201,7 +201,7 @@ Below are some the examples on how you could use the call to implement simple pr
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 
-#Help Guide
+## Help Guide
 
 This is a list of Errors I encountered during the addition of HTTPS Call to the sandbox. This guide might help the user get over some of the similar kind of errors that the he/she might be experiencing during addition of an API Call to "Repy" Sandbox. To make things simpler we are going to assume that the user is making an API call for Repy that will fetch "Weather News" so the name of the user's own module/python_file that the user is working on is named "weather_report". The same module name will be used in the document for reference. 
 
@@ -251,7 +251,7 @@ This is a list of Errors I encountered during the addition of HTTPS Call to the 
   
        This same strategy could be adopted for any other "Unsafe Call" errors that are encountered while making your own API        call for the 'repyV2' sandbox. There is no surity that it will work for sure and use it at your own risk.
   
-#References:
+## References:
   
 http://stackoverflow.com/questions/448271/what-is-init-py-for  
 https://github.com/SeattleTestbed/repy_v2/issues/92  
