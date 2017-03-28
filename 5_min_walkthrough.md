@@ -1,6 +1,6 @@
-#Tutorial
+# Tutorial
 
-In this 5-minute walkthrough, we will check out the HTTPS-enabled RepyV2 sandbox and run a simple example script. We assume you have Git and Python 2 installed. Clone the appropriate repo and build it (see the Seattle Testbed BuildInstructions [https://seattle.poly.edu/wiki/RepyV2Tutorial] for details):
+In this 5-minute walkthrough, we will check out the HTTPS-enabled RepyV2 sandbox and run a simple example script. We assume you have Git and Python 2 installed. The repo that we will be cloning will be is "https://github.com/deepjaisia/repy_v2.git". Clone the appropriate repo and build it (see the Seattle Testbed BuildInstructions [https://seattle.poly.edu/wiki/RepyV2Tutorial] for details):
 
 ```
 ~$ git clone https://github.com/deepjaisia/repy_v2.git -b add_test_call_to_sandbox ./deep_repy_v2  
@@ -10,8 +10,12 @@ remote: Compressing objects: 100% (7/7), done.
 remote: Total 1796 (delta 2), reused 0 (delta 0), pack-reused 1789  
 Receiving objects: 100% (1796/1796), 1.37 MiB | 0 bytes/s, done.  
 Resolving deltas: 100% (930/930), done.  
-Checking connectivity... done.  
-~$ cd ./deep_repy_v2  
+Checking connectivity... done.
+```
+ 
+After cloning the repository to the **"deep_repy_v2"** directory we move into the directory where the repo is cloned and build repy_v2.
+
+```~$ cd ./deep_repy_v2  
 ~/deep_repy_v2$ cd scripts/  
 ~/deep_repy_v2/scripts$ python initialize.py   
 Checking out repo from https://github.com/SeattleTestbed/seattlelib_v2 ...  
@@ -28,20 +32,22 @@ Checking out repo from https://github.com/SeattleTestbed/utf ...
 Done!  
 ~/deep_repy_v2/scripts$ python build.py   
 Building into /home/albert/deep_repy_v2/RUNNABLE  
-Done building!  
-~/deep_repy_v2/scripts$ cd ../RUNNABLE/  
-~/deep_repy_v2/RUNNABLE$
+Done building!
 ```  
 
 RUNNABLE now contains a sandbox runtime directory including the HTTPS extensions.
 
-Next, create a file named get_seattle_webpage.r2py containing this simple example program:
+Next, we will create a file named **"get_seattle_webpage.r2py"** containing this simple example program:
 
-```log(httpsget("seattle.poly.edu", "GET", "/", "", False), "\n")```
+```
+log(httpsget("seattle.poly.edu", "/", "", False), "\n")
+```
 
 Run this script like so,
 
-```~/deep_repy_v2/RUNNABLE$ python repy.py restrictions.default get_seattle_webpage.r2py```
+```
+python repy.py restrictions.default get_seattle_webpage.r2py
+```
 
 Your output should be similar to this:
 
@@ -59,27 +65,37 @@ Your output should be similar to this:
 
 Congratulations, you've just written your first program to use the HTTPS-enabled sandbox! This concludes the 5-minute walkthrough.
 
-##Advanced
+## Advanced
 
-After completing a 5-minute Tutorial we will now see how to use the call and host a server and use the server for fetching files from the server. A lot of reference would be used from: https://github.com/deepjaisia/SandboxHttpsExtensions/blob/master/README.md, so please be sure to check this manual out to get a more elaborate explanation of the steps involved in this tutorial. The steps involved are numbered as follows:
+After completing a 5-minute Tutorial we will now see how to use the call and host a server and use the server for fetching files from the server. A detailed step by step guide is provided here(https://github.com/deepjaisia/SandboxHttpsExtensions/blob/master/README.md) on how to setup the localhost server and how to create a self-signed certificate and start using the server for hosting files and use the call functionality to check the authenticity of the server. To run some of the examples below you might need to setup a "localhost" server and create a self-signed certificate.
 
-- Hosting an Apache Server
-We need to set up a localhost server in order to save files to the localhost server and then server files to other clients or just use it for your own testing purposes. The server for now can serve variety of files supported by Apache itself. 
+## Examples
 
-Check the link: https://github.com/deepjaisia/SandboxHttpsExtensions/blob/master/README.md for a more elaborate explanation on how to set up the server and host files.
+We are assuming that the user is acquainted on how to setup a "localhost" server and how to create self-signed certificate. If not refer the "Advanced" section of this documentation. All the examples stated here are taken as a reference from there itself only. We will be saving the examples with an extension ".r2py".
 
-#Knowing The Call
+The command that we will be using to run the program is as follows, where "test_https.r2py" is the name of the file:
 
-   Now after completing the 5-Minute walkthrough successfully there might be some things that the user might be curious. We'll first go    through some of the parameters of the function call one by one below :-
-    
-   ##[httpsget('server_name', 'method', 'webpage_within_server', 'name_of_cert', trust_on_server)]      
+```
+sudo python repy.py restrictions.default test_https.r2py
+```
 
-   * server_name : The name of the server needs to be specified. It could be 'https://google.com' or any other website. It can also be your 'localhost' server.
+1.  
 
-   * method : It is used to specify which method do you want to use when fetching contents from server using this API Call. It can be      'GET' or 'PUT'. 'GET' is working for now but functionality for 'PUT' still needs to be tested out.
+```
+a, b, c = httpsget('localhost', '/test_https.py.zip', 'my_site.crt', True)      
+log(a, b, c, "\n")      
+file2 = openfile('asdf', True)      
+file2.writeat(b,0)
+```  
 
-   * webpage_within_server : This is used to give the name of the webpage that the user wants to get the information of. It can be left    blank or you can input '/', if there is no specific webpage that the user is hunting for within the server.
-  
-   * name_of_cert : This field needs to be filled by the user and the he/she needs to specify the name of self-signed certificate they      have used for their local server. Prequisite to this field requires the user to copy and save the self-signed certificate to the same folder from where they are running the "Repy" code.
+"/test_https.py.zip" is a file hosted by the "localhost" server.
+"my_site.crt" is the name of the self-signed certificate and it has to be stored in the same directory as that of "/RUNNABLE".
 
-   * trust_on_server : It is a boolean value (True/False). If the user wants to trust the server and has the certificate for the         particular server he/she is connecting then he/she can put 'True' in this field (Eg. Connecting to localhost or some known local     servers). But if the server is unknown it is better to fill the field with 'False' (Eg. Connecting to servers on the internet like     'Google', 'Yahoo', 'YouTube').
+2.
+
+```  
+a, b, c = httpsget('www.google.com', '/', '', False)      
+log(a, b, c, "\n")      
+file2 = openfile('asdf', True)      
+file2.writeat(b,0)
+```
