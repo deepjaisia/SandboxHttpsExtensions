@@ -12,13 +12,13 @@ It is assumed you have some basic knowledge of ports, self-signed certificate, c
 
 ### General Operation
 
-Before we start to use the function call we need to install some things first. The list with details is shown below:-
-
-1. Repy
+#### Cloning Repy Repository
 
    You have to install Repy before you can start using the call itself. This link :                                            "https://seattle.poly.edu/wiki/RepyV2Tutorial" provides gives a small tour to the Sandbox and the installation procedure    as well. Once you are done with the setup of "Repy".
+
+Once we have cloned the "repy" repository and setup "repy" accordingly we can start using the call. But if we intend to use a self-signed certificate for a localhost server we can follow the procedure given below :-
    
-2. Apache Server
+#### 2. Apache Server
 
   * Installation      
 
@@ -26,7 +26,9 @@ Before we start to use the function call we need to install some things first. T
 
      You can install Apache Server using the command given below in the Ubuntu Terminal or download it from this link            (https://httpd.apache.org/download.cgi) according to your Operating System.
 
-     ```sudo apt-get install apache2```
+     ```
+     sudo apt-get install apache2
+     ```
 
   * Enabling SSL
 
@@ -46,15 +48,17 @@ Before we start to use the function call we need to install some things first. T
 
   * Creating Self-Signed Certificate for your Apache Server
 
-     Aapche comes with it's own server and key when you enable 'SSL' on Apache. But it doesn't stop the user from playing        with their own Self-Signed Certificates for the server. This part of guide will help you on how you can create a Self-      Signed Certificate and use that for your Apache Server. We are going to use OpenSSL from the terminal window to create      the certificate and then some minor modifications to the configuration file of the Server will get you up and running        in no time.
+     Aapche comes with it's own certificate and key when you enable 'SSL' on Apache. But it doesn't stop the user from playing        with their own Self-Signed Certificates for the server. This part of guide will help you on how you can create a Self-      Signed Certificate and use that for your Apache Server. We are going to use OpenSSL from the terminal window to create      the certificate and then some minor modifications to the configuration file of the Server will get you up and running        in no time.
 
      For the certificate, just run the following command in the terminal window. You will come across some fields that you        have to fill out.
 
-     Note : Remember the certificate password as it will be used everytime you restart the service for the server.
+     Note : If you are prompter to enter a password, remember the certificate password as it will be used everytime you restart the service for the server.
 
-     ```openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout my_site.key -out my_site.crt```
+     ```
+     openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout my_site.key -out my_site.crt
+     ```
 
-     This command will create a single .pem object which will contain the 'certificate' and the 'key'. Explanation of the        different attributes used in the command is given below:
+     This command will create a two files with extenstions ".crt" and ".key "which will contain the 'certificate' and the 'key' respectively. Explanation of the        different attributes used in the command is given below:
      
      **-x509** : This field outputs a x509 structure.
      
@@ -80,23 +84,31 @@ Before we start to use the function call we need to install some things first. T
 
      After changing the locations for both the files, just save the configuration file. We have successfully now configured      SSL on Apache Server using our Self-Signed Certificate and Key.
 
-3. Cloning Repository
+#### 3. Cloning Repository
 
    If the user wants to use the call and make some testing they could clone the repository on their machine and then test      it out. The user can use the following command to Clone the repository to their machine. First thing to check is the        current directory that the user is working and make a new directory within the current one where the "RepyV2" will          be stored. The new directory that I would be making in this example would be "RepyTesting". 
    
-   ```mkdir RepyTesting```
+   ```
+   mkdir RepyTesting
+   ```
    
    After making a new directory we would move to the new directory where we would clone the repository.
    
-   ```cd RepyTesting```
+   ```
+   cd RepyTesting
+   ```
    
    Before using the command to clone the repo make sure you have 'git' installed on your machine. To install git the user      can use the command given below.
    
-   ```sudo apt-get install git```
+   ```
+   sudo apt-get install git
+   ```
    
    After we have 'git' on our machine we could go about and clone the repo.
    
-   ```git clone -b name_of_branch https://github.com/username/name_of_repo.git```
+   ```
+   git clone -b name_of_branch https://github.com/username/name_of_repo.git
+   ```
    
    The user can skip '-b name_of_branch' attribute to the git command if he/she wants to clone the "Master" branch. 
    
@@ -106,21 +118,21 @@ Before we start to use the function call we need to install some things first. T
    
    The command in this case being where you want to download "Repy" with the 'httpsget' call is as follows.
    
-   ```git clone -b add_test_call_to_sandbox https://github.com/deepjaisia/repy_v2.git```
+   ```
+   git clone -b add_test_call_to_sandbox https://github.com/deepjaisia/repy_v2.git
+   ```
 
 ### [httpsget('server_name', 'method', 'webpage_within_server', 'name_of_cert', trust_on_server)]
 
 ### Doc String:
 
-1. Purpose:      
+#### 1. Purpose:      
 
   Provides you with the content of the webpage that is stored at the address location of the webserver provided by the         user. The content could be the source code of the webpage, a text document or even a zip file.
 
-2. Arguments:      
+#### 2. Arguments:      
 
   * server_name : The name of the server needs to be specified. It could be 'https://google.com' or any other website. It     can also be your 'localhost' server.
-
-  * method : It is used to specify which method do you want to use when fetching contents from server using this API Call.     It can be 'GET' or 'PUT'. 'GET' is working for now but functionality for 'PUT' still needs to be tested out.
 
   * webpage_within_server : This is used to give the name of the webpage that the user wants to get the information of. It     can be left blank or you can input '/', if there is no specific webpage that the user is hunting for within the server.
   
@@ -129,19 +141,21 @@ Before we start to use the function call we need to install some things first. T
   * trust_on_server : It is a boolean value (True/False). If the user wants to trust the server and has the certificate for   the particular server he/she is connecting then he/she can put 'True' in this field (Eg. Connecting to localhost or some     known local servers). But if the server is unknown it is better to fill the field with 'False' (Eg. Connecting to servers   on the internet like 'Google', 'Yahoo', 'YouTube').
 
 
-3. Exceptions:      
+#### 3. Exceptions:      
 
   * NameError : If the boolean expression of "trust_on_server" field is inappropriate      
-  * SSLError : If the SSL certificate of the user is not genuine.
+  * SSLError : If the SSL certificate with the user is not genuine.
+  * CertiError : If "name_of_cert" field is left blank when "trust_on_server" field is "True".
 
-4. Side Effects      
+#### 4. Side Effects      
 
-  * None so far.
+  * None recorded so far.
 
-5. Returns      
+#### 5. Returns      
  
   * The status of the server      
   * The contents of the webpage that is requested within the webserver.
+  * Headers of t
 
 ## Example:
 
@@ -157,26 +171,32 @@ Below are some examples on how to use the httpsget and start downloading some fi
      
     From the above lines we know that the location for the certificate is "/etc/ssl/certs/ssl-cert-snakeoil.pem". Once we know the           location for the "Certificate" we can copy the certificate to our destination folder. To perform the copy operation we can copy         command from the terminal or a simple copy and paste from the GUI would also do. Anyways I'll provide the terminal command for the       people who would still love to use the terminal for copying the contents. Firstly we have to navigate to the source directory for       the "Certificate" from the terminal and the location for the certificate is showed above and this can be done using the command         shown below. 
      
-    ```cd /etc/ssl/certs/ssl-cert-snakeoil.pem```
+    ```
+    cd /etc/ssl/certs/ssl-cert-snakeoil.pem
+    ```
      
     After navigating to the directory use the command below to copy the certificate.
      
-    ```sudo cp ssl-cert-snakeoil.pem your_repy_runnable_directory```
+    ```
+    sudo cp ssl-cert-snakeoil.pem /your_repy_runnable_directory
+    ```
 
 Below are some the examples on how you could use the call to implement simple programs that allow the user to download files that the 'localhost' server serves or the get the web content of a webpage. 
      
-1. Here is a little example on how you can use the function call and use it to your benefit so you can download the contents of a website or you can even download a zip file from the server and save it on your computer.
+#### 1. Here is a little example on how you can use the function call and use it to your benefit so you can download the contents of a website or you can even download a zip file from the server and save it on your computer.
 
   ```  
-  a, b = httpsget('localhost', 'GET', '/test_https.py.zip', 'my_site.crt', True)      
-  log(a, b, "\n")      
+  a, b, c = httpsget('localhost', '/test_https.py.zip', 'my_site.crt', True)      
+  log(a, b, c, "\n")      
   file2 = openfile('asdf', True)      
   file2.writeat(b,0)
   ```  
 
   The user can use this as a test code and save it with '.r2py' extension for usage. To run this program the user can type     the following line in the terminal. The user should run the program in 'sudo' mode if "Permission Denied" error pops up     during running the code. If this doesn't help it might be an restriction within "Repy" Sandbox itself. We are going to       assume that the user saves the file with the name "test_https.r2py".
 
-  ```sudo python repy.py restrictions.test test_https.r2py```
+  ```
+  sudo python repy.py restrictions.default test_https.r2py
+  ```
 
   Since we know that the API Call returns two values therefore that's the reason we have two variables "'a' and 'b'". 'a'     gives us the status of the website and 'b' returns the content of the webpage that we have requested from the server         'localost' which is "/test_https.py.zip". And from this we can conclude that we are requesting a zip file from the server   stored at that location. 
 
@@ -184,18 +204,20 @@ Below are some the examples on how you could use the call to implement simple pr
 
   We are using the other Repy API Calls to write the contents that we fetched from the server to a file.
 
-2. This is an another example where if the user wants to just want to see the HTML content of any webpage on the internet.
+#### 2. This is an another example where if the user wants to just want to see the HTML content of any webpage on the internet.
 
   ```  
-  a, b = httpsget('www.google.com', 'GET', '/', 'my_site.crt', False)      
-  log(a, b, "\n")      
+  a, b, c = httpsget('www.google.com', '/', '', False)      
+  log(a, b, c, "\n")      
   file2 = openfile('asdf', True)      
   file2.writeat(b,0)
   ```  
 
   The user can use this as a test code and save it with '.r2py' extension for usage. To run this program the user can type     the following line in the terminal. The user should run the program in 'sudo' mode if "Permission Denied" error pops up     during running the code. If this doesn't help it might be an restriction within "Repy" Sandbox itself. We are going to       assume that the user saves the file with the name "test_https.r2py".
 
-  ```sudo python repy.py restrictions.test test_https.r2py```
+  ```
+  sudo python repy.py restrictions.default test_https.r2py
+  ```
 
   This 'Repy' program returns the content of the webpage 'www.google.com' and then displays the content of the webpage and     also write the same output to the file which is named 'asdf'. See how we put 'False' in the last field of the 'httpsget'     call in the first line of the program, that is because we don't know if the server on the internet is certified or not.
 
@@ -219,15 +241,21 @@ This is a list of Errors I encountered during the addition of HTTPS Call to the 
    
        In this case the module is 'ascii' within the 'encodings' module. We 'import' this module to "weather_report" file.          To alleviate this error, we will add the following line to "weather_report":
    
-       ```import encodings.ascii```
+       ```
+       import encodings.ascii
+       ```
    
        or
    
-       ```from encodings import ascii```
+       ```
+       from encodings import ascii
+       ```
    
        **AVOID USING :** 
    
-       ```from abc import *```
+       ```
+       from abc import *
+       ```
        
        Where 'abc' is any module that the user wants to import.
    
@@ -235,7 +263,9 @@ This is a list of Errors I encountered during the addition of HTTPS Call to the 
    
    b. Add the following line of code to your own module
    
-     ```module_name.getattr = getattr```
+     ```
+     module_name.getattr = getattr
+     ```
    
      Where module_name = The name of the module which gives the getattr/hasattr/__import__ error.
    
@@ -247,7 +277,9 @@ This is a list of Errors I encountered during the addition of HTTPS Call to the 
 
        The module name in the above case is "ssl" so we will add the following line of code to "weather_report" file:-
      
-       ```ssl.getattr = getattr``` 
+       ```
+       ssl.getattr = getattr
+       ``` 
   
        This same strategy could be adopted for any other "Unsafe Call" errors that are encountered while making your own API        call for the 'repyV2' sandbox. There is no surity that it will work for sure and use it at your own risk.
   
