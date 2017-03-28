@@ -14,17 +14,17 @@ It is assumed you have some basic knowledge of ports, self-signed certificate, c
 
 #### Cloning Repy Repository
 
-   You have to install Repy before you can start using the call itself. This link :                                            "https://seattle.poly.edu/wiki/RepyV2Tutorial" provides gives a small tour to the Sandbox and the installation procedure    as well. Once you are done with the setup of "Repy".
+We will be cloining the following "repy" repository for testing this call: "https://github.com/deepjaisia/repy_v2.git". You can refer "https://github.com/deepjaisia/SandboxHttpsExtensions/blob/master/5_min_walkthrough.md" for instructions on how clone and setup repy You have to install Repy before you can start using the call itself. This link : "https://seattle.poly.edu/wiki/RepyV2Tutorial" provides gives a small tour to the Sandbox and the installation procedure as well. Once you are done with the setup of "Repy".
 
 Once we have cloned the "repy" repository and setup "repy" accordingly we can start using the call. But if we intend to use a self-signed certificate for a localhost server we can follow the procedure given below :-
    
-#### 2. Apache Server
+#### 1. Apache Server
 
   * Installation      
 
-     This is not necessary to install, but if you want to make any changes and test out the call on your localsystem              installing this server is the best option.
+     This is not necessary to install, but if you want to make any changes and test out the call on your localsystem installing this server is the best option.
 
-     You can install Apache Server using the command given below in the Ubuntu Terminal or download it from this link            (https://httpd.apache.org/download.cgi) according to your Operating System.
+     You can install Apache Server using the command given below in the Ubuntu Terminal or download it from this link (https://httpd.apache.org/download.cgi) according to your Operating System.
 
      ```
      sudo apt-get install apache2
@@ -32,7 +32,7 @@ Once we have cloned the "repy" repository and setup "repy" accordingly we can st
 
   * Enabling SSL
 
-     You would also need to enable SSL on the Apache server once you've installed it. The new Apache Server is packaged with      SSL Support so there is no need to dive into the configuration files like we had to in the early days. There are set of      3 commands that will help you enable SSL on Apache in no time. You could always follow this link                            (https://help.ubuntu.com/14.04/serverguide/httpd.html) if you need more info or you get lost.
+     You would also need to enable SSL on the Apache server once you've installed it. The new Apache Server is packaged with SSL Support so there is no need to dive into the configuration files like we had to in the early days. There are set of 3 commands that will help you enable SSL on Apache in no time. You could always follow this link (https://help.ubuntu.com/14.04/serverguide/httpd.html) if you need more info or you get lost.
 
      ```
      sudo a2enmod ssl                
@@ -42,13 +42,13 @@ Once we have cloned the "repy" repository and setup "repy" accordingly we can st
 
   * Adding files to Apache Server
 
-     When you have enabled SSL on Apache, the first thing that the user would be doing is adding some webpages or files to        your own server and test out if the server is actually functioning properly. In order for that to happen the user has        to add the files to a location on the machine from where the server could access the files. One thing to note is that        the Apache Server can serve some of the basic file types by default like : .html, .txt, .py, .zip and some more. For        "apache2" the user can add the files to the following folder.  
+     When you have enabled SSL on Apache, the first thing that the user would be doing is adding some webpages or files to your own server and test out if the server is actually functioning properly. In order for that to happen the user has to add the files to a location on the machine from where the server could access the files. One thing to note is that the Apache Server can serve some of the basic file types by default like : .html, .txt, .py, .zip and some more. For "apache2" the user can add the files to the following folder.  
 
      **"/var/www/html"**
 
   * Creating Self-Signed Certificate for your Apache Server
 
-     Aapche comes with it's own certificate and key when you enable 'SSL' on Apache. But it doesn't stop the user from playing        with their own Self-Signed Certificates for the server. This part of guide will help you on how you can create a Self-      Signed Certificate and use that for your Apache Server. We are going to use OpenSSL from the terminal window to create      the certificate and then some minor modifications to the configuration file of the Server will get you up and running        in no time.
+     Aapche comes with it's own certificate and key when you enable 'SSL' on Apache. But it doesn't stop the user from playing        with their own Self-Signed Certificates for the server. This part of guide will help you on how you can create a Self-Signed Certificate and use that for your Apache Server. We are going to use OpenSSL from the terminal window to create the certificate and then some minor modifications to the configuration file of the Server will get you up and running in no time.
 
      For the certificate, just run the following command in the terminal window. You will come across some fields that you        have to fill out.
 
@@ -58,35 +58,35 @@ Once we have cloned the "repy" repository and setup "repy" accordingly we can st
      openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout my_site.key -out my_site.crt
      ```
 
-     This command will create a two files with extenstions ".crt" and ".key "which will contain the 'certificate' and the 'key' respectively. Explanation of the        different attributes used in the command is given below:
+     This command will create a two files with extenstions ".crt" and ".key "which will contain the 'certificate' and the 'key' respectively. Explanation of the different attributes used in the command is given below:
      
      **-x509** : This field outputs a x509 structure.
      
-     **-newkey** : This specifies that by using which algorithm we are going to create the key of the specified size. In          this case it is RSA of 4096 bits.
+     **-newkey** : This specifies that by using which algorithm we are going to create the key of the specified size. In this case it is RSA of 4096 bits.
 
      **-keyout** : This specifies the name of the key that would be created. It creates a '.key' object but it can also create '.pem' object.
 
-     **-out** : This specifies the name of the certificate that would be created. It can be a '.crt' object also but for          this case we are going to take a '.pem' object.
+     **-out** : This specifies the name of the certificate that would be created. It can be a '.crt' object also but for this case we are going to take a '.pem' object.
 
      **-days** : This specifies the number of days for which the certificate will be valid for. It is 365 days in this case.
  
-     We are now almost there, we have created a Self-Signed Certifcate and now all that we have to do is make Apache Server      find this certificate and use this as default. Firstly we have to find the configuration file and then edit it. Mostly      for Ubuntu users you could find the configuration file at this location : '/etc/apache2/sites-enabled/default-              ssl.conf'. 
+     We are now almost there, we have created a Self-Signed Certifcate and now all that we have to do is make Apache Server find this certificate and use this as default. Firstly we have to find the configuration file and then edit it. Mostly for Ubuntu users you could find the configuration file at this location : '/etc/apache2/sites-enabled/default-ssl.conf'. 
 
-     'default-ssl.conf' is the configuration file that we are looking for. Upon opening up the file in a text editor we have      to search for the following lines in the configuration file :  
+     'default-ssl.conf' is the configuration file that we are looking for. Upon opening up the file in a text editor we have to search for the following lines in the configuration file :  
 
      **SSLCertificateFile      /etc/ssl/certs/ssl-cert-snakeoil.pem**       
      **SSLCertificateKeyFile   /etc/ssl/private/ssl-cert-snakeoil.key**
 
-     We replace the location of the SSLCertificateFile and the SSLCertificateKeyFile to the location where we saved our own      Self-Signed Certificate and Key. The location for the 'Self-Signed Certificate' and 'Key File' will be the same              directory where the user ran their "OpenSSL" command in the terminal. The user can check their current directory by          typing 'pwd' in the terminal. The location for me in this case was 'Home' so I changed the location for the                  SSLCertificateFile and SSLCertificateKeyFile as follows:        
+     We replace the location of the SSLCertificateFile and the SSLCertificateKeyFile to the location where we saved our own Self-Signed Certificate and Key. The location for the 'Self-Signed Certificate' and 'Key File' will be the same directory where the user ran their "OpenSSL" command in the terminal. The user can check their current directory by typing 'pwd' in the terminal. The location for me in this case was 'Home' so I changed the location for the SSLCertificateFile and SSLCertificateKeyFile as follows:        
 
      **SSLCertificateFile      /home/frostbyte/my_site.crt**       
      **SSLCertificateKeyFile   /home/frostbyte/my_site.key**       
 
-     After changing the locations for both the files, just save the configuration file. We have successfully now configured      SSL on Apache Server using our Self-Signed Certificate and Key.
+     After changing the locations for both the files, just save the configuration file. We have successfully now configured SSL on Apache Server using our Self-Signed Certificate and Key.
 
-#### 3. Cloning Repository
+#### 2. Cloning Repository
 
-   If the user wants to use the call and make some testing they could clone the repository on their machine and then test      it out. The user can use the following command to Clone the repository to their machine. First thing to check is the        current directory that the user is working and make a new directory within the current one where the "RepyV2" will          be stored. The new directory that I would be making in this example would be "RepyTesting". 
+   If the user wants to use the call and make some testing they could clone the repository on their machine and then test it out. The user can use the following command to Clone the repository to their machine. First thing to check is the current directory that the user is working and make a new directory within the current one where the "RepyV2" will be stored. The new directory that I would be making in this example would be "RepyTesting". 
    
    ```
    mkdir RepyTesting
@@ -98,7 +98,7 @@ Once we have cloned the "repy" repository and setup "repy" accordingly we can st
    cd RepyTesting
    ```
    
-   Before using the command to clone the repo make sure you have 'git' installed on your machine. To install git the user      can use the command given below.
+   Before using the command to clone the repo make sure you have 'git' installed on your machine. To install git the user can use the command given below.
    
    ```
    sudo apt-get install git
@@ -128,17 +128,17 @@ Once we have cloned the "repy" repository and setup "repy" accordingly we can st
 
 #### 1. Purpose:      
 
-  Provides you with the content of the webpage that is stored at the address location of the webserver provided by the         user. The content could be the source code of the webpage, a text document or even a zip file.
+  Provides you with the content of the webpage that is stored at the address location of the webserver provided by the user. The content could be the source code of the webpage, a text document or even a zip file.
 
 #### 2. Arguments:      
 
-  * server_name : The name of the server needs to be specified. It could be 'https://google.com' or any other website. It     can also be your 'localhost' server.
+  * server_name : The name of the server needs to be specified. It could be 'https://google.com' or any other website. It can also be your 'localhost' server.
 
-  * webpage_within_server : This is used to give the name of the webpage that the user wants to get the information of. It     can be left blank or you can input '/', if there is no specific webpage that the user is hunting for within the server.
+  * webpage_within_server : This is used to give the name of the webpage that the user wants to get the information of. It can be left blank or you can input '/', if there is no specific webpage that the user is hunting for within the server.
   
   * name_of_cert : This field needs to be filled by the user and the he/she needs to specify the name of self-signed certificate they have used for their local server. Prequisite to this field requires the user to copy and save the self-signed certificate to the same folder from where they are running the "Repy" code.
 
-  * trust_on_server : It is a boolean value (True/False). If the user wants to trust the server and has the certificate for   the particular server he/she is connecting then he/she can put 'True' in this field (Eg. Connecting to localhost or some     known local servers). But if the server is unknown it is better to fill the field with 'False' (Eg. Connecting to servers   on the internet like 'Google', 'Yahoo', 'YouTube').
+  * trust_on_server : It is a boolean value (True/False). If the user wants to trust the server and has the certificate for the particular server he/she is connecting then he/she can put 'True' in this field (Eg. Connecting to localhost or some known local servers). But if the server is unknown it is better to fill the field with 'False' (Eg. Connecting to servers   on the internet like 'Google', 'Yahoo', 'YouTube').
 
 
 #### 3. Exceptions:      
@@ -155,7 +155,7 @@ Once we have cloned the "repy" repository and setup "repy" accordingly we can st
  
   * The status of the server      
   * The contents of the webpage that is requested within the webserver.
-  * Headers of t
+  * Headers of the webpage
 
 ## Example:
 
