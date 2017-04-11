@@ -45,6 +45,83 @@ Once we have cloned the "repy" repository and setup "repy" accordingly we can st
      When you have enabled SSL on Apache, the first thing that the user would be doing is adding some webpages or files to your own server and test out if the server is actually functioning properly. In order for that to happen the user has to add the files to a location on the machine from where the server could access the files. One thing to note is that the Apache Server can serve some of the basic file types by default like : .html, .txt, .py, .zip and some more. For "apache2" the user can add the files to the following folder.  
 
      **"/var/www/html"**
+  
+  * Running Apache Server on a Custom Port
+    
+    Once you have setup Apache Server and we want to run Apache server on a custom port number apart from the defualt : '443'. We can change the port number by following the simple steps. We have to make changes to configuration files residing in the Apache server folder. The location of the two files is given as follows:
+    
+    **"/etc/apache2/ports.conf"**
+    **"/etc/apache2/sites-enabled/default-ssl.conf"**
+    
+    Suppose we want to setup the server at "Port Number" : 10800, we just have to make changes to these two files. Open your command prompt and follow the commands below:
+    
+    ```
+    cd /etc/apache2
+    sudo gedit ports.conf
+    ```
+    
+    Type in your password and now a windows will open up where you can edit the file "ports.conf". There will be a section as follows:
+    
+    ```
+    <IfModule ssl_module>
+	   Listen 443
+    </IfModule>
+    ```
+    
+    **Change it to:**
+    
+    ```
+    <IfModule ssl_module>
+	   Listen 10800
+    </IfModule>
+    ```
+    
+    Now just save the file and exit the editor. We have successfully changed the port to which the server will listen for ssl services and half-way through the services.
+    
+    We have to make changes to the next file in order to complete the process. Follow the commands belows to make changes to the next file.
+    
+    ```
+    cd /etc/apache2/sites-enabled/
+    sudo gedit default-ssl.conf
+    ```
+    
+    Type in your password and now a windows will open up where you can edit the file "default-ssl.conf". There will be a section as follows:
+    
+    ```
+    <IfModule mod_ssl.c>
+	   <VirtualHost _default_:443>
+		  ServerAdmin webmaster@localhost 
+        ...........
+    ```
+    
+    **Change it to:**
+    
+    ```
+    <IfModule mod_ssl.c>
+	   <VirtualHost _default_:10800>
+		  ServerAdmin webmaster@localhost 
+        ...........
+    ```
+    
+    Now again save and exit the file editor. We are now completely setup.
+    
+    We just have to restart the "Apache" server to make these changes takes place. Just run the following command to perform the operation.
+    
+    ```
+    sudo service apache2 restart
+    ```
+    
+    Hooray, we are all set and now the Apache Server on the newly assigned port: 10800 setup by us. You can check it by running the following command in the terminal.
+    
+    ```
+    sudo netstat -tulpn | grep apache2
+    ```
+    You will get a result something like this:
+    
+    ```
+    tcp6       0      0 :::80                   :::*                    LISTEN      4718/apache2    
+    tcp6       0      0 :::10800                :::*                    LISTEN      4718/apache2 
+    ```
 
   * Creating Self-Signed Certificate for your Apache Server
 
